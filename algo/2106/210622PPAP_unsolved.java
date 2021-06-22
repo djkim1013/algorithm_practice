@@ -1,5 +1,5 @@
 //AOJ: PPAP (https://www.algospot.com/judge/problem/read/PPAP)
-//2021.06.22(미해결)
+//2021.06.22(미해결) - 시간초과
 //문제 분류: -
 //해결 분석: KMP 알고리즘
 
