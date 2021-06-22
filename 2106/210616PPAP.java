@@ -1,7 +1,7 @@
 //AOJ: PPAP (https://www.algospot.com/judge/problem/read/PPAP)
 //2021.06.
-//¹®Á¦ ºĞ·ù: -
-//ÇØ°á ºĞ¼®: KMP ¾Ë°í¸®Áò
+//ë¬¸ì œ ë¶„ë¥˜: -
+//í•´ê²° ë¶„ì„: KMP ì•Œê³ ë¦¬ì¦˜
 
 import java.util.Scanner;
 
