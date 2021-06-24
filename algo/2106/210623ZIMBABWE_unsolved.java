@@ -2,50 +2,53 @@
 //2021.06.23
 //문제 분류: 동적계획법
 //해결 분석: 
-
 import java.util.*;
 
 public class Main {
 	
 	static final int mod = 1000000007;
 	static String e, plates;
-	static int n;
+	static int n, m;
 	
-	static int generate(String price, int taken) {
+	static int generate(String price, boolean[] taken) {
 		int len=price.length(); 
 		if(len==n) {
-			System.out.println(price);
-			if(price.compareTo(e)>0) {
+			if(price.compareTo(e)<0) {
+//				System.out.println("price "+price);
 				return 1;
 			}
 			return 0;
 		}
 		int answer=0;
-		for(int i=0;i<len;i++) {
-			if(((taken&(1<<i))==0)&&
-					(i==0||e.charAt(i)!=e.charAt(i-1)||(taken&(1<<(i-1)))!=0)) {
-				int takenCp=taken|(1<<i);
-				System.out.println(takenCp);
-				answer+=generate(price+e.charAt(i),takenCp);
+		for(int i=0;i<n;i++) {
+			if(!taken[i]&&
+					(i==0||plates.charAt(i)!=plates.charAt(i-1)||taken[i-1])) {
+				boolean[] takenCp=Arrays.copyOf(taken,taken.length);
+				takenCp[i]=true;
+				answer+=generate(price+plates.charAt(i),takenCp);
+				answer%=mod;
 			}
 		}
 		return answer;
 	}
 	
 	public static void main(String[] args) {
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
 		int c=sc.nextInt();
 		for(int i=0;i<c;i++) {
 			e=sc.next();
 			n=e.length();	
-			int m=sc.nextInt();
+			m=sc.nextInt();
 
 			char[] eSort=e.toCharArray();
 			Arrays.sort(eSort);
 			plates=String.valueOf(eSort);
+			System.out.println(plates);
 			
-			int taken=0;
-			
+			boolean[] taken= new boolean[n];
+			for(boolean v:taken)System.out.print(v+" ");
+			System.out.println();
 			System.out.println(generate("",taken));
 		}
 		
