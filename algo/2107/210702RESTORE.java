@@ -10,7 +10,7 @@ import java.util.*;
 public class Main {
 	static int n;
 	static String[] arr = new String[15];
-	static int[] cache = new int[15*(1<<15)];
+	static int[] cache = new int[16*(1<<15)];
 	static int[] overlap = new int[16*15];
 	
 	static void countOverlap(){
@@ -18,15 +18,16 @@ public class Main {
 			String front = arr[i];
 			for(int j=0;j<n;j++){
 				String back = arr[j];
-				int bCur = Math.min(front.length(),back.length());
-				int fCur = front.length()-bCur;
-				while(fCur<=front.length()&&bCur>0){
-					if(front.substring(fCur).equals(back.substring(0, bCur))){
-						overlap[15*i+j]=bCur;
-						break;
+				int len = Math.min(front.length(),back.length());
+				for(int k=1;k<len;k++){
+					String subFront = front.substring(front.length()-k);
+					String subBack = back.substring(0, k);
+					if(subFront.equals(subBack)){
+						System.out.println(subBack);
+						overlap[i*15+j]=subBack.length();
+						continue;
 					}
-					fCur++;
-					bCur--;
+					break;
 				}
 			}
 		}
@@ -50,15 +51,14 @@ public class Main {
 	}
 
 	static String findShortStr(int pre, int used){
+		if(used==((1<<15)-1))return "";
 		for(int i=0;i<n;i++){
 			if((used&(1<<i))!=0)continue;
-			int len = findShort(i,used|(1<<i));
-			if(used>0){
-				len += overlap[pre*15+i];
-			}
+			int len = findShort(i,used|(1<<i)) + overlap[pre*15+i];
 			if(findShort(pre,used)==len){
-				if(used==0) return arr[i]+findShortStr(i,used|(1<<i));
-				return arr[i].substring(overlap[pre*15+i])+findShortStr(i,used|(1<<i));
+				String str = arr[i].substring(overlap[pre*15+i]);
+				System.out.println("str: "+str);
+				return str+findShortStr(i,used|(1<<i));
 			}
 		}
 		return "!";
@@ -75,8 +75,8 @@ public class Main {
 				arr[i] = sc.next();
 			}
 			countOverlap();
-			findShort(0,0);
-			System.out.println(findShortStr(0,0));
+			findShort(15,0);
+			System.out.println(findShortStr(15,0));
 		}
 		sc.close();
 	}
