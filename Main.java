@@ -12,8 +12,16 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int answer = 0;
-        System.out.println(answer);
+        int answer1 = 1;
+        int answer2 = 1;
+        int sum = 1;
+        while((sum+=++answer1)<n);
+        // System.out.println(sum);
+        while(--sum>=n){
+            answer1--;
+            answer2++;
+        }
+        System.out.println(answer2+"/"+answer1);
         sc.close();
     }
 }
