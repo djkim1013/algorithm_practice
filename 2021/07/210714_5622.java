@@ -1,7 +1,7 @@
-//BOJ: 2908
+//BOJ: 5622
 //2021.07.14
 //category: 문자열
-//review: StringBuilder.reverse() <- 실행할 때 대상 객체를 변경한다.
+//review: 
 
 import java.util.*;
 
