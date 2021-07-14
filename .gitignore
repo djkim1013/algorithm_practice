@@ -3,6 +3,5 @@
 .setting/
 
 #testfile
-main.cpp
-main.exe
-Main.java
+**/main*
+**/Main*
