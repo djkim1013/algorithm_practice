@@ -1,4 +1,8 @@
+#local setting
 .vscode/
 .setting/
-main*
-Main*
+
+#testfile
+main.cpp
+main.exe
+Main.java
