@@ -14,6 +14,7 @@ public class Main {
         char[] str = sc.next().toCharArray();
         int answer = 0;
         for(int i=0;i<str.length;i++){
+            answer++;
             if(i+2<str.length){
                 if(str[i]=='d'&&str[i+1]=='z'&&str[i+2]=='='){
                     i+=2;
@@ -22,13 +23,14 @@ public class Main {
             if(i+1<str.length){
                 if(str[i]=='c'&&(str[i+1]=='='||str[i+1]=='-')){
                     i++;
+                }else if(str[i]=='d'&&str[i+1]=='-'){
+                    i++;
                 }else if((str[i]=='l'||str[i]=='n')&&str[i+1]=='j'){
                     i++;
                 }else if((str[i]=='z'||str[i]=='s')&&str[i+1]=='='){
                     i++;
                 }
             }
-            answer++;
         }
         System.out.println(answer);
         sc.close();
