@@ -3,5 +3,5 @@
 .setting/
 
 #testfile
-main*
-Main*
+#main*
+#Main*
