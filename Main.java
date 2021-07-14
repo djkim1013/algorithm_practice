@@ -1,4 +1,4 @@
-//BOJ: 2292
+//BOJ: 1193
 //2021.07.14
 //category: 기본수학
 //review:
@@ -13,8 +13,6 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int answer = 0;
-        int floor = 1;
-        while((floor+=answer++*6)<n);
         System.out.println(answer);
         sc.close();
     }
