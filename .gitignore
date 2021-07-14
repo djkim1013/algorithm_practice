@@ -1,5 +1,4 @@
 .vscode/
 .setting/
-*.exe
-#main.cpp
-#Main.java
+main.*
+Main.*
