@@ -1,37 +1,20 @@
-//BOJ: 2775
+//BOJ: 2839
 //2021.07.16
 //category: 기본수학
 //review:
-//      - 오류: k,n 범위 오류 방지를 위해 배열을 넉넉하게 잡는다.
-//      - 오답: 배열크기를 고치고 초기화 크기를 고치지 않았음
 
 import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int[][] apt = new int[15][15];
-    static int countNeighbor(int k, int n){
-        if(k==0) return n;
-        int ret = apt[k][n];
-        if(ret>-1) return ret;
-        ret = 0;
-        for(int i=1;i<=n;i++){
-            ret+=countNeighbor(k-1,i);
-        }
-        apt[k][n] = ret;
-        return ret;
-    }
+    static int[] cache = new int[1000];
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-        int t = Integer.parseInt(in.readLine());
-        for(int i=0;i<15;i++)Arrays.fill(apt[i],-1);
-        for(int test=0;test<t;test++){
-            int k = Integer.parseInt(in.readLine());
-            int n = Integer.parseInt(in.readLine());
-            int answer=countNeighbor(k, n);
-            out.write(answer+"\n");
-        }
+        for(int i=0;i<cache.length;i++)Arrays.fill(cache,-1);
+        int n = Integer.parseInt(in.readLine());
+        int answer=0;
+        out.write(answer+"\n");
         out.flush();
     }
 }
