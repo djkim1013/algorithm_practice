@@ -1,7 +1,9 @@
 //BOJ: 2869
-//2021.07.14
+//2021.07.15
 //category: 기본수학
 //review:
+//      - while문으로 작성 시 시간초과
+//      - 나눗셈으로 작성 시 시간초과
 
 import java.util.*;
 
@@ -11,13 +13,14 @@ public class Main {
         int a = sc.nextInt();
         int b = sc.nextInt();
         int v = sc.nextInt();
-        int h = 0;
-        int answer = 1;
-        while((h+=a)<v){
-            answer++;
-            h-=b;
-        }
-        System.out.println(answer);
+        int answer = v-a;
+        if(answer<=0){
+            System.out.println(1);
+            sc.close();
+            return;
+        } 
+        answer = answer/(a-b) + 1;
+        System.out.println(++answer);
         sc.close();
     }
 }
