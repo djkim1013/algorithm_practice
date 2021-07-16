@@ -7,16 +7,29 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+    static int goal;
+    static int calDays(int cur,int k){
+        if(cur>=goal){
+            if(cur==goal&&k==1)return 0;
+            return 0xfff0000;
+        }
+        int ret=0xfff0000;
+        for(int i=k-1;i<=k+1;i++){
+            if(i<=0)continue;
+            ret=Math.min(calDays(cur+i,i),ret);
+        }
+        return ++ret;
+    }
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
         int t = Integer.parseInt(in.readLine());
         for(int test=0;test<t;test++){
             StringTokenizer st=new StringTokenizer(in.readLine()," ");
-            int x = Integer.parseInt(st.nextToken());
-            int y = Integer.parseInt(st.nextToken());
-            int answser = 0;
-            out.write(Integer.toString(answer));
+            int cur = Integer.parseInt(st.nextToken());
+            goal = Integer.parseInt(st.nextToken());
+            int answer = calDays(cur,0);
+            out.write(Integer.toString(answer)+"\n");
         }
         out.flush();
     }
