@@ -2,6 +2,8 @@
 //2021.07.16
 //category: 기본수학
 //review:
+//      - x<y<2^31: stack overflow
+//      - k stack overflow
 
 import java.io.*;
 import java.util.*;
@@ -15,7 +17,8 @@ public class Main {
         }
         int ret=0xfff0000;
         for(int i=k-1;i<=k+1;i++){
-            if(i<=0)continue;
+            if(i<=0||i>=Integer.MAX_VALUE-1)continue;
+            if(cur>=Integer.MAX_VALUE-i)continue;
             ret=Math.min(calDays(cur+i,i),ret);
         }
         return ++ret;
@@ -23,6 +26,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+        out.write(((1<<31)-1)+" "+Integer.MAX_VALUE);
         int t = Integer.parseInt(in.readLine());
         for(int test=0;test<t;test++){
             StringTokenizer st=new StringTokenizer(in.readLine()," ");
