@@ -3,6 +3,7 @@
 //category: 기본수학
 //review:
 //      - 코드가 너무 복잡해져서 지움
+//      - stringbuilder로 해결
 
 import java.io.*;
 
