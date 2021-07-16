@@ -2,18 +2,26 @@
 //2021.07.16
 //category: 기본수학
 //review:
+//      while 경계값 주의
 
 import java.io.*;
-import java.util.*;
 
 public class Main {
-    static int[] cache = new int[1000];
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-        for(int i=0;i<cache.length;i++)Arrays.fill(cache,-1);
         int n = Integer.parseInt(in.readLine());
-        int answer=0;
+        int nMod5 = n%5;
+        int answer = n/5;
+        while(nMod5<=n){
+            if(nMod5%3==0){
+                answer+=nMod5/3;
+                break;
+            }
+            nMod5+=5;
+            answer--;
+        }
+        if(nMod5>n)answer=-1;
         out.write(answer+"\n");
         out.flush();
     }
