@@ -2,7 +2,7 @@
 //2021.07.16
 //category: 기본수학
 //review:
-//      - 오답: w를 고려하지 않았음
+//      - 오답: 경계값 처리 실패
 
 import java.io.*;
 import java.util.*;
@@ -20,8 +20,8 @@ public class Main {
             int n = Integer.parseInt(st.nextToken());
             int answer=0;
             answer = (n%h)*100;
+            if (answer == 0) answer = h*100;
             answer += n/h+1;
-
             out.write(answer+"\n");
         }
         out.flush();
