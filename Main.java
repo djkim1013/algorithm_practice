@@ -1,5 +1,5 @@
-//BOJ: 11653
-//2021.07.18
+//BOJ: 9020
+//2021.07.19
 //category: 기본수학
 //review:
 
@@ -12,14 +12,6 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(in.readLine());
-        while(n>1){
-            int m = 1;
-            while(++m<n){
-                if(n%m==0)break;
-            }
-            out.write(m+"\n");
-            n/=m;
-        }
         out.flush();
     }
 }
