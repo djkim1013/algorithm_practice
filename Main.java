@@ -11,28 +11,22 @@ public class Main {
     static StringBuilder log = new StringBuilder();
     static ArrayList<ArrayList<Integer>> top=new ArrayList<ArrayList<Integer>>();
     static int movePlate(int target,int start,int end){
-        if(top.get(start).get(0)==target&&top.get(0).get(0)<target){
+        if(target==1){
             top.get(start).remove(0);
             top.get(0).add(0,target);
             log.append(start+" "+end+"\n");
             return 1;
         }
-        int nextTarget = 0;
-        int ret = 0;
-        if(top.get(start).get(0)!=target){
-            nextTarget=top.get(start).get(top.get(start).indexOf(target)-1);
-            ret+=movePlate(nextTarget,start,rest[start][end]);
-            ret+=movePlate(target,start,end);
-            ret+=movePlate(nextTarget,rest[start][end],end);
-        }else{
+        if(top.get(start).get(0)<target){
+            movePlate()
         }
-        return ret;
+        return 0;
     }
     public static void main(String[] args)throws Exception{
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(in.readLine());
-        for(int i=0;i<3;i++) top.add(new ArrayList<Integer>());
+        for(int i=0;i<3;i++) top.add(new ArrayList<Integer>(n+1));
         for(int i=1;i<=n;i++){
             top.get(0).add(i);
         }
