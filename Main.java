@@ -1,6 +1,6 @@
-//BOJ: 
+//BOJ: 2231
 //2021.07.20
-//category: 재귀함수 구현
+//category: 완전탐색
 //review:
 
 import java.io.*;
