@@ -2,6 +2,7 @@
 //2021.07.20
 //category: 정렬
 //review:
+//      - 삽입정렬 구현
 
 import java.io.*;
 // import java.util.*;
