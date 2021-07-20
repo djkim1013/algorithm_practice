@@ -11,15 +11,19 @@ import java.io.*;
 // import java.util.*;
 
 public class Main {
+    static int calDecomp(int n){
+        int order = 1;
+        int ret = n;
+        while(n>0){
+            ret+=order*(n%10);
+            order*=10;
+            n/=10;
+        }
+        return ret;
+    }
     static int findConstructor(int n){
-        for(int i=0;i<10;i++){
-            for(int j=0;j<10;j++){
-                for(int k=0;k<10;k++){
-                    if(i*101+j*11+k*2==n){
-                        return i*100+j*10+k;
-                    }
-                }
-            }
+        for(int i=1;i<n/2;i++){
+            if(calDecomp(i)==n) return i;
         }
         return 0;
     }
