@@ -1,4 +1,4 @@
-//BOJ: 
+//BOJ: 2798
 //2021.07.20
 //category: 재귀함수 구현
 //review:
@@ -10,7 +10,7 @@ import java.util.*;
 public class Main {
     static int[] cards;
     static int m, n;
-    static int answer=0;
+    static int answer=0;_
     static void findBlackJack(int idx,int used,int sum){
         if(used==3){
             if(sum>m)return;
