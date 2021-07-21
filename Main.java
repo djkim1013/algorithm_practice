@@ -29,7 +29,18 @@ public class Main {
         answer=arr[n/2];
         out.write(answer+"\n");
         //mode
-        
+        answer=0;
+        int[] count=new int[arr[n-1]-arr[0]+1];
+        int maxCount=0;
+        for(int i:arr){
+            count[i-arr[0]]++;
+        }
+        for(int i=0;i<count.length;i++){
+            if(maxCount>count[i])continue;
+            if(maxCount==count[i])maxCount++;
+            answer=arr[0]+i;
+            maxCount=count[i];
+        }
         out.write(answer+"\n");
         //range
         answer=arr[n-1]-arr[0];
