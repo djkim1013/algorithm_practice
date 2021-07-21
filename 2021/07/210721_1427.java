@@ -15,6 +15,7 @@ public class Main {
         for(int i=str.length-1;i>=0;i--){
             out.write(str[i]);
         }
+        out.write(str.toString());
         out.flush();
     }
 }
