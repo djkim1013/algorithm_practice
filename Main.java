@@ -1,23 +1,24 @@
-//BOJ: 1181
+//BOJ: 10814
 //2021.07.21
 //category: 정렬
 //review:
+//      - 문제 오독: 나이가 같으면 이름순 정렬이 아니라 가입일 순 정렬이다.
 
 import java.io.*;
 import java.util.*;
 
 public class Main {
     
-    static public class Vocabulary implements Comparable<Vocabulary>{
-        String str;
-        Integer len;
-        public Vocabulary(String str){
-            this.str=str;
-            this.len=str.length();
+    static public class User implements Comparable<User>{
+        Integer age;
+        String name;
+        public User(int age,String name){
+            this.age=age;
+            this.name=name;
         }
-        public int compareTo(Vocabulary other){
-            if(len.compareTo(other.len)==0) return str.compareTo(other.str);
-            return len.compareTo(other.len);
+        public int compareTo(User other){
+            if(age.compareTo(other.age)==0) return name.compareTo(other.name);
+            return age.compareTo(other.age);
 
         }
     }
@@ -26,15 +27,16 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(in.readLine());
-        Vocabulary[] arr = new Vocabulary[n];
+        User[] arr = new User[n];
         for(int i=0;i<n;i++){
-            String str = in.readLine();
-            arr[i]=new Vocabulary(str);
+            StringTokenizer st = new StringTokenizer(in.readLine());
+            int age = Integer.parseInt(st.nextToken());
+            String name = st.nextToken();
+            arr[i]=new User(age,name);
         }
         Arrays.sort(arr);
         for(int i=0;i<n;i++){
-            if(i>0&&arr[i-1].str.equals(arr[i].str))continue;
-            out.write(arr[i].str);
+            out.write(arr[i].age+" "+arr[i].name);
             out.newLine();
         }
         out.flush();
