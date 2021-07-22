@@ -24,11 +24,12 @@ public class Main {
         int[] arrSort=arr.clone();
         Arrays.sort(arrSort);
         HashMap<Integer,Integer> rank = new HashMap<Integer,Integer>();
-        rank.put(arrSort[0],0);
+        // rank.put(arrSort[0],0);
         int count=0;
-        for(int i=1;i<n;i++){
-            if(arrSort[i]>arrSort[i-1]){
-                rank.put(arrSort[i],++count);
+        for(int i=0;i<n;i++){
+            // if(arrSort[i]>arrSort[i-1]){
+            if(!rank.containsKey(arrSort[i])){
+                rank.put(arrSort[i],count++);
             }
         }
         for(int i:arr){
