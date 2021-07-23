@@ -10,7 +10,7 @@ import java.io.*;
 
 public class Main{
     static int n;
-    static int nQueen(int row,int col,int count,boolean[][] board){
+    static int nQueen(int row,int col,int count,int[] board){
         if(count==n){
             return 1; 
         }
@@ -22,19 +22,16 @@ public class Main{
         }
         int ret = 0;
         ret += nQueen(row,col+1,count,board);
-        if(!board[row][col]){
-            boolean[][] boardNew = new boolean[n][n];
-            for(int i=0;i<n;i++)
-                for(int j=0;j<n;j++)
-                    boardNew[i][j] = board[i][j];
+        if((board[row]&(1<<col))==0){
+            int[] boardNew = board.clone();
             for(int i=0;i<n;i++){
-                if(!boardNew[row][i]) boardNew[row][i]=true;
-                if(!boardNew[i][col]) boardNew[i][col]=true;
+                if((boardNew[row]&(1<<i))==0) boardNew[row]+=1<<i;
+                if((boardNew[i]&(1<<col))==0) boardNew[i]+=1<<col;
                 
-                if(row-i>=0&&col-i>=0&&!boardNew[row-i][col-i]) boardNew[row-i][col-i]=true;
-                if(row-i>=0&&col+i<n&&!boardNew[row-i][col+i]) boardNew[row-i][col+i]=true;
-                if(row+i<n&&col-i>=0&&!boardNew[row+i][col-i]) boardNew[row+i][col-i]=true;
-                if(row+i<n&&col+i<n&&!boardNew[row+i][col+i]) boardNew[row+i][col+i]=true;
+                if(row-i>=0&&col-i>=0&&(boardNew[row-i]&(1<<(col-i)))==0) boardNew[row-i]+=1<<(col-i);
+                if(row-i>=0&&col+i<n&&(boardNew[row-i]&(1<<(col+i)))==0) boardNew[row-i]+=1<<(col+i);
+                if(row+i<n&&col-i>=0&&(boardNew[row+i]&(1<<(col-i)))==0) boardNew[row+i]+=1<<(col-i);
+                if(row+i<n&&col+i<n&&(boardNew[row+i]&(1<<(col+i)))==0) boardNew[row+i]+=1<<(col+i);
             }
             ret+=nQueen(row,col+1,count+1,boardNew);
         }
@@ -43,6 +40,6 @@ public class Main{
     public static void main(String[] args)throws IOException{
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(in.readLine());
-        System.out.print(nQueen(0,0,0,new boolean[n][n]));
+        System.out.print(nQueen(0,0,0,new int[n]));
     }
 }
