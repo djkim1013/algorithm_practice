@@ -1,5 +1,5 @@
-//BOJ: 15650
-//2021.07.22
+//BOJ: 15651
+//2021.07.23
 //category: backtracking
 //review:
 
@@ -7,24 +7,24 @@
 import java.io.*;
 
 public class Main{
-    static int n, m;
-    public static void list(int idx,String output){
-        if(idx>n||output.length()==m){
-            if(output.length()<m)return;
+    int n, m;
+    void list(int idx,String output){
+        if(output.length()==m){
             for(int i=0;i<m;i++){
                 System.out.print(output.charAt(i)+" ");
             }
             System.out.println();
             return;
         }
-        list(idx+1,output+idx);
-        list(idx+1,output);
+        for(int i=idx;i<=n;i++){
+            list(idx,output+i);
+        }
     }
-
     public static void main(String[] args)throws IOException{
-        n = System.in.read()-'0';
+        Main mClass = new Main();
+        mClass.n = System.in.read()-'0';
         System.in.read();
-        m = System.in.read()-'0';
-        list(1,"");
+        mClass.m = System.in.read()-'0';
+        mClass.list(1,"");
     }
 }
