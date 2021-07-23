@@ -2,6 +2,8 @@
 //2021.07.23
 //category: backtracking
 //review:
+//      - 다차원 배열은 clone()으로는 깊은 복사가 되지 않음 주의
+//      - 메모리 초과:
 
 // import java.util.*;
 import java.io.*;
@@ -10,7 +12,7 @@ public class Main{
     static int n;
     static int nQueen(int row,int col,int count,boolean[][] board){
         if(count==n){
-           return 1; 
+            return 1; 
         }
         if(row==n){
             return 0;
@@ -21,11 +23,20 @@ public class Main{
         int ret = 0;
         ret += nQueen(row,col+1,count,board);
         if(!board[row][col]){
+            boolean[][] boardNew = new boolean[n][n];
+            for(int i=0;i<n;i++)
+                for(int j=0;j<n;j++)
+                    boardNew[i][j] = board[i][j];
             for(int i=0;i<n;i++){
-                if(!board[row][i]) board[row][i]=true;
-                if(!board[i][col]) board[i][col]=true;
+                if(!boardNew[row][i]) boardNew[row][i]=true;
+                if(!boardNew[i][col]) boardNew[i][col]=true;
+                
+                if(row-i>=0&&col-i>=0&&!boardNew[row-i][col-i]) boardNew[row-i][col-i]=true;
+                if(row-i>=0&&col+i<n&&!boardNew[row-i][col+i]) boardNew[row-i][col+i]=true;
+                if(row+i<n&&col-i>=0&&!boardNew[row+i][col-i]) boardNew[row+i][col-i]=true;
+                if(row+i<n&&col+i<n&&!boardNew[row+i][col+i]) boardNew[row+i][col+i]=true;
             }
-            for(int i=)
+            ret+=nQueen(row,col+1,count+1,boardNew);
         }
         return ret;
     }
