@@ -1,5 +1,5 @@
-//BOJ: 
-//2021.07.25
+//BOJ: 14889
+//2021.07.26
 //category: backtracking
 //review:
 
