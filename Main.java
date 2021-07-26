@@ -17,6 +17,7 @@ public class Main{
                 int sum = 0;
                 for(int j=0;j<n;j++){
                     sum+=input[i][j];
+                    sum+=input[j][i];
                 }
                 for(int j:team){
                     if(j==i){
@@ -26,7 +27,7 @@ public class Main{
                 }
                 ret+=sum;
             }
-            if(ret*ret<min*min) min = ret;
+            if(ret*ret<min*min) min = ret>0?ret:-ret;
             return;
         }
         if(idx==n) return;
@@ -48,7 +49,7 @@ public class Main{
                 input[i][j]=Integer.parseInt(st.nextToken());
             }
         }
-        divTeam(null,0);
+        divTeam(new int[0],0);
         System.out.println(min);
     }
 }
