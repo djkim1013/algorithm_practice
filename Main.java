@@ -11,32 +11,35 @@ public class Main{
     static int n;
     static int[][] input;
     static void divTeam(int[] team,int idx){
-        if(team.length==n/2){
+        if(idx==n){
+            // for(int i:team){
+            //     System.out.print(i+" ");
+            // }
+            // System.out.println();
             int ret = 0;
-            for(int i=0;i<n;i++){
-                int sum = 0;
-                for(int j=0;j<n;j++){
-                    sum+=input[i][j];
-                    sum+=input[j][i];
+            for(int i=0;i<n/2;i++){
+                int ii=team[i];
+                for(int j=0;j<n/2;j++){
+                    int jj=team[j];
+                    ret+=input[ii][jj];
                 }
-                for(int j:team){
-                    if(j==i){
-                        sum*=-1;
-                        break;
-                    }
-                }
-                ret+=sum;
             }
-            if(ret*ret<min*min) min = ret>0?ret:-ret;
+            for(int i=n/2;i<n;i++){
+                int ii=team[i];
+                for(int j=n/2;j<n;j++){
+                    int jj=team[j];
+                    ret-=input[ii][jj];
+                }
+            }
+            if(ret<0)ret=-ret;
+            min=Math.min(ret,min);
             return;
         }
-        if(idx==n) return;
-        int[] newTeam = new int[team.length+1];
-        for(int i=0;i<team.length;i++) newTeam[i]=team[i];
-        for(int i=idx;i<n;i++){
-            for(int j:team) if(j==i) continue;
-            newTeam[idx]=i;
-            divTeam(newTeam,idx+1);
+        for(int i=1;i<n;i++){
+            if(team[i]>0)continue;
+            team[i]=idx;
+            divTeam(team,idx+1);
+            team[i]=0;
         }
     }
     public static void main(String[] args)throws IOException{
@@ -44,12 +47,12 @@ public class Main{
         n = Integer.parseInt(in.readLine());
         input = new int[n][n];
         for(int i=0;i<n;i++){
-            StringTokenizer st = new StringTokenizer(in.readLine());
+            StringTokenizer st = new StringTokenizer(in.readLine()," ");
             for(int j=0;j<n;j++){
                 input[i][j]=Integer.parseInt(st.nextToken());
             }
         }
-        divTeam(new int[0],0);
+        divTeam(new int[n],1);
         System.out.println(min);
     }
 }
