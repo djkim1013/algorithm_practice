@@ -24,19 +24,13 @@ public class Main{
     static int maxPartialLeft(int idx){
         if(idx==-1) return 0;
         int ret = 0;
-        if(idx==n){
-            for(int i=idx;i>=0;i--){
-                ret=Math.max(maxPartialLeft(i)+1,ret);
-            }
-            return ret; 
-        }
         ret = cache1[idx];
         if(ret>-1) return ret;
         ret = 0;
-        for(int i=idx;i>=0;i--){
-            if(arr[i]<arr[idx]) ret=Math.max(maxPartialLeft(i)+1,ret);
+        for(int i=idx;i<n;i++){
+            if(arr[i]>arr[idx]) ret=Math.max(maxPartial(i)+1,ret);
         }
-        return cache1[idx]=ret;
+        return cache[idx]=ret;
     }
 
     static int maxPartialRight(int idx){
@@ -44,17 +38,17 @@ public class Main{
         int ret = 0;
         if(idx==-1){
             for(int i=0;i<n;i++){
-                ret=Math.max(maxPartialRight(i)+1,ret);
+                ret=Math.max(maxPartial(i)+1,ret);
             }
             return ret; 
         }
-        ret = cache2[idx];
+        ret = cache[idx];
         if(ret>-1) return ret;
         ret = 0;
-        for(int i=idx;i<n;i++){
-            if(arr[i]>arr[idx]) ret=Math.max(maxPartialRight(i)+1,ret);
+        for(int i=idx+1;i<n;i++){
+            if(arr[i]>arr[idx]) ret=Math.max(maxPartial(i)+1,ret);
         }
-        return cache2[idx]=ret;
+        return cache[idx]=ret;
     }
 
     public static void main(String[] args)throws IOException{
