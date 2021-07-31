@@ -1,5 +1,5 @@
 //BOJ: 11054
-//2021.07.30
+//2021.07.31
 //category: dynamic programming
 //review:
 
@@ -13,46 +13,30 @@ public class Main{
 
     static int maxBitonic(){
         int ret=0;
-        for(int i=-1;i<n;i++){
+        for(int i=0;i<n;i++){
             int left = maxPartialLeft(i);
-            int right = maxPartialRight(i+1);
-            ret = Math.min(left+right,ret);
+            int right = maxPartialRight(i);
+            ret = Math.max(left+right,ret);
         }
-        return ret;
+        return ++ret;
     }
 
     static int maxPartialLeft(int idx){
-        if(idx==-1) return 0;
-        int ret = 0;
-        if(idx==n){
-            for(int i=idx;i>=0;i--){
-                ret=Math.max(maxPartialLeft(i)+1,ret);
-            }
-            return ret; 
-        }
-        ret = cache1[idx];
+        int ret = cache1[idx];
         if(ret>-1) return ret;
         ret = 0;
-        for(int i=idx;i>=0;i--){
+        for(int i=idx-1;i>=0;i--){
             if(arr[i]<arr[idx]) ret=Math.max(maxPartialLeft(i)+1,ret);
         }
         return cache1[idx]=ret;
     }
 
     static int maxPartialRight(int idx){
-        if(idx==n) return 0;
-        int ret = 0;
-        if(idx==-1){
-            for(int i=0;i<n;i++){
-                ret=Math.max(maxPartialRight(i)+1,ret);
-            }
-            return ret; 
-        }
-        ret = cache2[idx];
+        int ret = cache2[idx];
         if(ret>-1) return ret;
         ret = 0;
-        for(int i=idx;i<n;i++){
-            if(arr[i]>arr[idx]) ret=Math.max(maxPartialRight(i)+1,ret);
+        for(int i=idx+1;i<n;i++){
+            if(arr[i]<arr[idx]) ret=Math.max(maxPartialRight(i)+1,ret);
         }
         return cache2[idx]=ret;
     }
