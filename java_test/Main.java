@@ -30,7 +30,7 @@ public class Main{
         cache = new int[n];
         Arrays.fill(cache,-1);
         int answer = maxContSum(0);
-        for(int i=1;i<n;i++){
+        for(int i=n-1;i>=0;i--){
             answer = Math.max(maxContSum(i), answer);
         }
         System.out.print(answer);
