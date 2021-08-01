@@ -1,5 +1,5 @@
-//BOJ: 9251
-//2021.08.01
+//BOJ: 1912
+//2021.08.02
 //category: dynamic programming
 //review:
 
@@ -7,34 +7,32 @@ import java.util.*;
 import java.io.*;
 
 public class Main{
-    static char[] strA;
-    static char[] strB;
-    static int lenA, lenB;
-    static int[][] cache;
+    static int n;
+    static int[] arr, cache;
 
-    static int lcs(int idxA, int idxB){
-        if(idxA==lenA||idxB==lenB) return 0;
-        int ret = cache[idxA][idxB];
-        if(ret>-1) return ret;
-        ret = 0;
-        for(int i=idxB;i<lenB;i++){
-            if(strA[idxA]==strB[i]){
-                ret = Math.max(ret, lcs(idxA+1,i+1)+1);
-                break;
-            }
-        }
-        ret = Math.max(ret, lcs(idxA+1,idxB));
-        return cache[idxA][idxB] = ret;
+    static int maxContSum(int idx){
+        if(idx==n) return 0;
+        int answer = cache[idx];
+        if(answer>-1) return answer;
+        answer = arr[idx];
+        answer = Math.max(answer,answer+maxContSum(idx+1));
+        return cache[idx] = answer;
     }
 
     public static void main(String[] args)throws IOException{
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        strA = in.readLine().toCharArray();
-        lenA = strA.length;
-        strB = in.readLine().toCharArray();
-        lenB = strB.length;
-        cache = new int[lenA][lenB];
-        for(int i=0;i<lenA;i++) Arrays.fill(cache[i],-1);
-        System.out.print(lcs(0,0));
+        BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(bin.readLine());
+        arr = new int[n];
+        StringTokenizer st = new StringTokenizer(bin.readLine()," ");
+        for(int i=0;i<n;i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        cache = new int[n];
+        Arrays.fill(cache,-1);
+        int answer = maxContSum(0);
+        for(int i=1;i<n;i++){
+            answer = Math.max(maxContSum(i), answer);
+        }
+        System.out.print(answer);
     }
 }
