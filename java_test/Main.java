@@ -8,20 +8,12 @@ import java.util.*;
 import java.io.*;
 
 public class Main{
-
+    
     public static void main(String[] args)throws IOException{
         BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(bin.readLine());
-        int[] arr = new int[n]; 
-        StringTokenizer st = new StringTokenizer(bin.readLine()," ");
-        for(int i=0;i<n;i++){
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-        int answer = arr[0];
-        for(int i=1;i<n;i++){
-            if(arr[i-1]>0&&arr[i]+arr[i-1]>0) arr[i] += arr[i-1];
-            answer = Math.max(arr[i], answer);
-        }
-        System.out.print(answer);
+        StringTokenizer st = new StringTokenizer(bin.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int k = Integer.parseInt(st.nextToken());
+
     }
 }
