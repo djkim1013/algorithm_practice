@@ -22,15 +22,15 @@ public class Main{
     public static void main(String[] args)throws IOException{
         BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
         n = Integer.parseInt(bin.readLine());
-        arr = new int[n];
+        arr = new int[n]; 
         StringTokenizer st = new StringTokenizer(bin.readLine()," ");
         for(int i=0;i<n;i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
         cache = new int[n];
         Arrays.fill(cache,-1);
-        int answer = maxContSum(0);
-        for(int i=n-1;i>=0;i--){
+        int answer = maxContSum(n-1);
+        for(int i=n-2;i>=0;i--){
             answer = Math.max(maxContSum(i), answer);
         }
         System.out.print(answer);
