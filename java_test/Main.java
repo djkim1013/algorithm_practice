@@ -1,9 +1,8 @@
-//AOJ: JOSEPHUS
+//AOJ: FENCE
 //2021.08.21
 //category: 선형자료구조
 //review:
-//      - 큐를 이용해 풀어보기
-//      - 큐 내부에서 순서를 바꿨으므로 오름차순 정렬이 되어있지 않다.
+//      - "스위핑 알고리즘"
 
 import java.util.*;
 import java.io.*;
