@@ -1,4 +1,4 @@
-//AOJ: boards
+//AOJ: BRACKETS2
 //2021.08.22
 //category: 선형자료구조
 //review:

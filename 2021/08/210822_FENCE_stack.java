@@ -1,5 +1,5 @@
-//AOJ: boards
-//2021.08.21
+//AOJ: FENCE
+//2021.08.22
 //category: 선형자료구조
 //review:
 //      - "스위핑 알고리즘"
