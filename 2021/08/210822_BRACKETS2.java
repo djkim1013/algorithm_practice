@@ -1,6 +1,6 @@
 //AOJ: BRACKETS2
 //2021.08.22
-//category: 선형자료구조
+//category: 큐/스텍/데크
 //review:
 //      -deque에서의 peek과 다르게 stack에서의 peek은 배열이 비었을때 예외를 발생시킴
 
