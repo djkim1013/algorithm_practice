@@ -13,32 +13,27 @@ public class Main {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
         int test=Integer.parseInt(br.readLine());
-        char[][] bracket={{'(',')'},{'{','}'},{'[',']'}};
+        final String opening="({[", closing=")}]";
         for(int t=0;t<test;t++){
-            boolean answer=true, done=false;
-            char[] str=br.readLine().toCharArray();
+            String answer="YES\n";
+            String str=br.readLine();
             Stack<Character> opened = new Stack<Character>();
-            for(char c:str){
-                for(char[] pair:bracket){
-                    if(c==pair[0]){
-                        opened.push(c);
+            for(int i=0;i<str.length();i++){
+                char c=str.charAt(i);
+                if(opening.indexOf(c)>-1){
+                    opened.push(c);
+                }
+                if(closing.indexOf(c)>-1){
+                    if(!opened.isEmpty()&&opened.peek()==opening.charAt(closing.indexOf(c))){
+                        opened.pop();
+                    }else{
+                        answer="NO\n";
                         break;
                     }
-                    if(c==pair[1]){
-                        if(!opened.isEmpty()&&opened.peek()==pair[0]){
-                            opened.pop();
-                            break;
-                        }else{
-                            answer=false;
-                            done=true;
-                            break;
-                        }
-                    }
                 }
-                if(done) break;
             }
-            if(!opened.isEmpty()) answer=false;
-            bw.write((answer?"YES":"NO")+"\n");
+            if(!opened.isEmpty()) answer="NO\n";
+            bw.write(answer);
         }
         bw.flush();
 	}
