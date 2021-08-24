@@ -1,4 +1,4 @@
-//AOJ: FORTRESS
+//AOJ: NERD2
 //2021.08.24
 //category: 트리 구현/순회
 //review:
@@ -8,78 +8,32 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int[][] walls=new int[100][3];
-    static int n, longest;
-    class Node{
-        int idx;
-        List<Node> children = new ArrayList<Node>();
-    }
-
-    Node getTree(int idx){
-        Node tree = new Node();
-        tree.idx = idx;
-        for(int ch=0;ch<n;ch++){
-            if(isChild(idx,ch)) tree.children.add(getTree(ch));
-        }
-        return tree;
-    }
-
-    boolean isChild(int parent, int child){
-        if(!enclose(parent,child)) return false;
-        for(int i=0;i<n;i++){
-            if(i!=parent&&i!=child&&
-                enclose(parent,i)&&enclose(i,child)){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    boolean enclose(int a, int b){
-        if(walls[a][2]<=walls[b][2]) return false;
-        int dxSqr=walls[a][0]-walls[b][0];
-        dxSqr*=dxSqr;
-        int dySqr=walls[a][1]-walls[b][1];
-        dySqr*=dySqr;
-        int drSqr=walls[a][2]-walls[b][2];
-        drSqr*=drSqr;
-        return dxSqr+dySqr<drSqr;
-    }
-    
-    int height(Node root){
-        List<Integer> heights = new ArrayList<Integer>();
-        for(int i=0;i<root.children.size();i++){
-            heights.add(height(root.children.get(i)));
-        }
-        if(heights.isEmpty()) return 0;
-        Collections.sort(heights);
-        if(heights.size()>=2){
-            longest=Math.max(longest,
-                2+heights.get(heights.size()-2)+heights.get(heights.size()-1));
-        }
-        return heights.get(heights.size()-1)+1;
-    }
-
-    int solve(Node root){
-        longest=0;
-        int h=height(root);
-        return Math.max(longest,h);
-    }
-
+    static int n;
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int caseN = Integer.parseInt(br.readLine());
-        Main m = new Main();
         for(int c=0;c<caseN;c++){
             n = Integer.parseInt(br.readLine());
+            TreeMap<Integer,Integer> tree = new TreeMap<Integer,Integer>();
             for(int i=0;i<n;i++){
                 StringTokenizer input = new StringTokenizer(br.readLine());
-                for(int j=0;j<3;j++){
-                    walls[i][j]=Integer.parseInt(input.nextToken());
+                int p=Integer.parseInt(input.nextToken());
+                int q=Integer.parseInt(input.nextToken());
+                tree.put(p, q);
+                int ceilQ = tree.get(tree.ceilingKey(p));
+                if(ceilQ>=q){
+                    tree.remove(p);
+                    continue;
+                }
+                SortedMap<Integer,Integer> underMap = tree.headMap(p);
+                for(int key:underMap.keySet()){
+                    if(key==p) continue;
+                    if(underMap.get(key)<=q){
+                        tree.remove(key);
+                    }
                 }
             }
-            Node root=m.getTree(0);
-            System.out.println(m.solve(root));
+            System.out.println(tree.size());
         }
     }
 }
