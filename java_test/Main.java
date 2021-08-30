@@ -13,6 +13,7 @@ public class Main {
     static int[] in,out;
     static int n;
     static ArrayList<Integer> circuit;
+
     static void makeGraph(String[] words){
         graph=(ArrayList<String>[][])new ArrayList[M][M];
         adj=new int[M][M];
@@ -39,6 +40,7 @@ public class Main {
         circuit.add(cur);
     }
     static void getEulerCircuitOrTrail(){
+        circuit = new ArrayList<Integer>();
         for(int i=0;i<26;i++){
             if(out[i]==in[i]+1){
                 getEulerCircuit(i);
@@ -57,11 +59,12 @@ public class Main {
         for(int i=0;i<26;i++){
             int del=out[i]-in[i];
             if(del==1) plus1++;
-            if(del==-1) minus1++;
-            if(del!=0) return false;
+            else if(del==-1) minus1++;
+            else if(del!=0) return false;
         }
         return (plus1==1&&minus1==1)||(plus1==0&&minus1==0);
     }
+
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int C = Integer.parseInt(br.readLine());
@@ -76,12 +79,12 @@ public class Main {
                 System.out.println("IMPOSSIBLE");
             else{
                 getEulerCircuitOrTrail();
-                if(circuit.size()==0)
+                if(circuit.size()<n)
                     System.out.println("IMPOSSIBLE");
                 else{
                     StringBuilder answer=new StringBuilder();
-                    for(int i=n-1;i>0;i++){
-                        int a=circuit.get(i-1), b=circuit.get(i);
+                    for(int i=n-1;i>0;i--){
+                        int a=circuit.get(i), b=circuit.get(i-1);
                         answer.insert(0,graph[a][b].get(graph[a][b].size()-1));
                         graph[a][b].remove(graph[a][b].size()-1);
                     }
