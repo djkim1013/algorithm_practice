@@ -2,6 +2,7 @@
 //2021.08.29
 //category: 깊이우선탐색
 //review:
+//      - 모든 단어를 사용하는 경우 중에 단어를 중복으로 사용하는 경우도 포함된다.
 
 import java.util.*;
 import java.io.*;
@@ -82,7 +83,7 @@ public class Main {
                     bw.append("IMPOSSIBLE\n");
                 else{
                     StringBuilder answer=new StringBuilder();
-                    for(int i=n;i>0;i--){
+                    for(int i=circuit.size()-1;i>0;i--){
                         int a=circuit.get(i), b=circuit.get(i-1);
                         answer.append(graph[a][b].get(graph[a][b].size()-1)+" ");
                         graph[a][b].remove(graph[a][b].size()-1);
