@@ -9,13 +9,14 @@ import java.io.*;
 public class Main {
     static int[][] halls;
     static int[] galleries;
+    static int count=0;
 
     static int dfs(int cur){
-        
-        for(int next:halls[cur]){
-
+        if(galleries[cur]!=-1) return galleries[cur];
+        for(int i=0;i<galleries.length;i++){
+            if(halls[cur][i]>0&&dfs(i)==1) return galleries[cur]=0;
         }
-        return 0;
+        return galleries[cur]=1;
     }
 
     public static void main(String[] args) throws Exception {
@@ -35,12 +36,11 @@ public class Main {
                 halls[a][b]=1;
                 halls[b][a]=1;
             }
-
-
-
-            
-        }
-        
-        
+            int answer=0;
+            for(int i=0;i<g;i++){
+                answer+=dfs(i);
+            }
+            System.out.println(answer);
+        }   
     }
 }
