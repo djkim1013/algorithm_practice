@@ -1,78 +1,41 @@
 //AOJ: SORTGAME
-//2021.09.29
+//2021.10.01
 //category: 그래프의 너비 우선 탐색
 //review:
-//      - 현재 배열 상태를 정점으로 표현한다.
 
 import java.util.*;
 import java.io.*;
 
 public class Main {
-    HashMap<String,Integer> distance=new HashMap<String,Integer>();
-    
-    void preCalc(int n){
-        int[] arr=new int[n];
-        for(int i=0;i<n;i++) arr[i]=i;
-        if(distance.containsKey(Arrays.toString(arr))) return;
-        bfs(n);
-    }
-
-    void bfs(int n){
-        int[] arr=new int[n];
-        for(int i=0;i<n;i++) arr[i]=i;
-        Queue<int[]> q=new LinkedList<int[]>();
-        distance.put(Arrays.toString(arr),0);
-        q.add(arr.clone());
-        while(!q.isEmpty()){
-            // for(int[] qarr:q){
-            //     System.out.print(Arrays.toString(qarr)+" ");
-            // }
-            // System.out.println();
-            int[] cur=q.poll();
-            int curDist=distance.get(Arrays.toString(cur));
-            for(int i=0;i<n;i++){
-                for(int j=i+1;j<n;j++){
-                    cur=reverse(cur,i,j);
-                    if(!distance.containsKey(Arrays.toString(cur))){
-                        q.add(cur.clone());
-                        distance.put(Arrays.toString(cur),curDist+1);
-                    }
-                    cur=reverse(cur,i,j);
-                }
+    String bfs(char[] cList,int n, int m){
+        if(String.valueOf(cList).equals("0")) return "IMPOSSIBLE";
+        Queue<String> que=new LinkedList<String>();
+        for(char c:cList){
+            if(c=='0') continue;
+            que.add(c+"");
+        }
+        while(!que.isEmpty()){
+            String cur=que.poll();
+            long curInt=Long.parseLong(cur);
+            if(curInt/n>0&&curInt%n==m) return cur;
+            for(char c:cList){
+                que.add(cur+c);
             }
         }
-    }
-
-    int[] reverse(int[] arr,int s,int e){
-        for(int i=0;s+2*i<e;i++){
-            int temp=arr[s+i];
-            arr[s+i]=arr[e-i];
-            arr[e-i]=temp;
-        }
-        return arr;
+        return "error";
     }
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int c=Integer.parseInt(br.readLine());
-        Main m=new Main();
-        while(c-->0){
-            int n=Integer.parseInt(br.readLine());
+        int t=Integer.parseInt(br.readLine());
+        Main mClass=new Main();
+        while(t-->0){
             StringTokenizer st=new StringTokenizer(br.readLine());
-            int[] arr=new int[n];
-            for(int i=0;i<n;i++) arr[i]=Integer.parseInt(st.nextToken());
-            int[] conv=arr.clone();
-            for(int i=0;i<n;i++){
-                int order=0;
-                for(int j=0;j<n;j++) if(arr[i]>arr[j]) order++;
-                conv[i]=order;
-            }
-            m.preCalc(n);
-            // for(String key:m.distance.keySet()){
-            //     System.out.print(key+" "+m.distance.get(key)+" ");
-            // }
-            // System.out.println();
-            System.out.println(m.distance.get(Arrays.toString(conv)));
+            char[] cList=st.nextToken().toCharArray();
+            Arrays.sort(cList);
+            int n=Integer.parseInt(st.nextToken());
+            int m=Integer.parseInt(st.nextToken());
+            System.out.println(mClass.bfs(cList,n,m));
         }
     }
 }
