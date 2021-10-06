@@ -1,4 +1,4 @@
-//BOJ: 1541
+//BOJ: 13305
 //2021.10.06
 //category: 그리디 알고리즘
 //review:
@@ -10,23 +10,23 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        char[] input = br.readLine().toCharArray();
-        int sum=0;
-        int operator=1;
-        StringBuilder number=new StringBuilder();
-        for(char c:input){
-            if(c=='+'){
-                sum+=operator*Integer.parseInt(number.toString());
-                number.delete(0,number.length());
-            }else if(c=='-'){
-                sum+=operator*Integer.parseInt(number.toString());
-                number.delete(0,number.length());
-                if(operator>0) operator*=-1;
-            }else{
-                number.append(c);
-            }
+        int n = Integer.parseInt(br.readLine());
+        int[] lengths=new int[n-1];
+        int[] prices=new int[n];
+        StringTokenizer st=new StringTokenizer(br.readLine());
+        for(int i=0;i<n-1;i++){
+            lengths[i]=Integer.parseInt(st.nextToken());
         }
-        sum+=operator*Integer.parseInt(number.toString());
-        System.out.println(sum);
+        st=new StringTokenizer(br.readLine());
+        for(int i=0;i<n;i++){
+            prices[i]=Integer.parseInt(st.nextToken());
+        }
+        int minPrice=prices[0];
+        int minSum=0;
+        for(int i=0;i<n-1;i++){
+            minSum+=minPrice*lengths[i];
+            minPrice=Math.min(minPrice,prices[i+1]);
+        }
+        System.out.println(minSum);
     }
 }
