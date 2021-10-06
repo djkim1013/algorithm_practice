@@ -1,33 +1,27 @@
-//BOJ: 13305
+//BOJ: 5086
 //2021.10.06
-//category: 그리디 알고리즘
+//category: 정수론 및 조합론
 //review:
-//      - 오버플로우에 주의
 
 import java.util.*;
 import java.io.*;
 
 public class Main {
-
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[] lengths=new int[n-1];
-        int[] prices=new int[n];
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        for(int i=0;i<n-1;i++){
-            lengths[i]=Integer.parseInt(st.nextToken());
+    static String judge(int a,int b){
+        if(a>b){
+            if(a%b==0) return "multilple";
+        }else if(b%a==0) return "factor";
+        return "neither";
+    }
+    public static void main(String[] args) throws Exception{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st=null;
+        while(true){
+            st=new StringTokenizer(br.readLine());
+            int a=Integer.parseInt(st.nextToken());
+            int b=Integer.parseInt(st.nextToken());
+            if(a==0&&b==0) break;
+            System.out.println(judge(a,b));
         }
-        st=new StringTokenizer(br.readLine());
-        for(int i=0;i<n;i++){
-            prices[i]=Integer.parseInt(st.nextToken());
-        }
-        int minPrice=prices[0];
-        long minSum=0;
-        for(int i=0;i<n-1;i++){
-            minSum+=(long)minPrice*lengths[i];
-            minPrice=Math.min(minPrice,prices[i+1]);
-        }
-        System.out.println(minSum);
     }
 }
