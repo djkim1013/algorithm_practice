@@ -12,9 +12,11 @@ public class Main {
         int n=Integer.parseInt(br.readLine());
         int answer=1;
         StringTokenizer st=new StringTokenizer(br.readLine());
-        while(n-->0){
+        for(int i=0;i<n;i++){
             answer*=Integer.parseInt(st.nextToken());
         }
+        if(n==1) answer*=answer;
         System.out.println(answer);
     }
 }
+
