@@ -8,8 +8,8 @@ import java.io.*;
 
 class Main{
     static int bico(int n, int k){
-        if(n==1&&k==1) return 1;
         if(k<0||k>n) return 0;
+        if(k==0||k==n) return 1;
         return bico(n-1,k-1)+bico(n-1,k);
     }
     public static void main(String[] arg)throws Exception{
