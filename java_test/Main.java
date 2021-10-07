@@ -1,4 +1,4 @@
-//BOJ: 1037
+//BOJ: 2981
 //2021.10.07
 //category: 정수론 및 조합론
 //review:
@@ -12,22 +12,28 @@ public class Main {
         if(a>0) return gcf(b%a,a);
         return b;
     }
-
-    static int lcm(int a,int b){
-        return b*a/gcf(a,b);
-    }
-    
     public static void main(String[] args) throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        int t=Integer.parseInt(br.readLine());
-        StringTokenizer st=null;
-        StringBuilder answer=new StringBuilder();
-        while(t-->0){
-            st=new StringTokenizer(br.readLine());
-            int a=Integer.parseInt(st.nextToken());
-            int b=Integer.parseInt(st.nextToken());
-            answer.append(lcm(a,b)+"\n");
+        int n=Integer.parseInt(br.readLine());
+        int[] numbers=new int[n];
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<n;i++){
+            numbers[i]=Integer.parseInt(br.readLine());
+            if(min>numbers[i]) min=numbers[i];
         }
-        System.out.print(answer);
+        Set<Integer> answer=new HashSet<Integer>();
+        while(min>1){
+            int g=numbers[0]--;
+            for(int i=1;i<n;i++){
+                g=gcf(numbers[i]--,g);
+            }
+            if(g>1){
+                answer.add(g);
+            }
+            min--;
+        }
+        Integer[] answerArr=answer.toArray(new Integer[0]);
+        Arrays.sort(answerArr);
+        for(int i:answerArr) System.out.print(i+" ");
     }
 }
