@@ -1,4 +1,4 @@
-//BOJ: 11050
+//BOJ: 11051
 //2021.10.07
 //category: 정수론 및 조합론
 //review:
@@ -10,7 +10,7 @@ class Main{
     static int bico(int n, int k){
         if(k<0||k>n) return 0;
         if(k==0||k==n) return 1;
-        return bico(n-1,k-1)+bico(n-1,k);
+        return (bico(n-1,k-1)+bico(n-1,k))%10007;
     }
     public static void main(String[] arg)throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
