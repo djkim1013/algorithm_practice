@@ -1,33 +1,22 @@
-//BOJ: 3036
+//BOJ: 
 //2021.10.07
 //category: 정수론 및 조합론
 //review:
-//      * string 연산을 피하자
 
 import java.util.*;
 import java.io.*;
 
-public class Main {
-    static int gcf(int a,int b){
-        if(a>b) return gcf(b,a);
-        if(a>0) return gcf(b%a,a);
-        return b;
+class Main{
+    static int bico(int n, int k){
+        if(n==1&&k==1) return 1;
+        if(k<0||k>n) return 0;
+        return bico(n-1,k-1)+bico(n-1,k);
     }
-
-    public static void main(String[] args) throws Exception{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        int n=Integer.parseInt(br.readLine());
-        int[] numbers=new int[n-1];
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        int first=Integer.parseInt(st.nextToken());
-        for(int i=0;i<n-1;i++){
-            numbers[i]=Integer.parseInt(st.nextToken());
-        }
-        StringBuilder answer=new StringBuilder();
-        for(int i:numbers){
-            int g=gcf(first,i);
-            answer.append(first/g).append("/").append(i/g).append("\n");
-        }
-        System.out.print(answer);
+    public static void main(String[] arg)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        int n = Integer.parse(input[0]);
+        int k = Integer.parse(input[1]);
+        System.out.println(bico(n,k));
     }
 }
