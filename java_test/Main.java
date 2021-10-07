@@ -21,19 +21,19 @@ public class Main {
             numbers[i]=Integer.parseInt(br.readLine());
             if(min>numbers[i]) min=numbers[i];
         }
-        Set<Integer> answer=new HashSet<Integer>();
+        Set<Integer> gcfs=new HashSet<Integer>();
         while(min>1){
             int g=numbers[0]--;
             for(int i=1;i<n;i++){
                 g=gcf(numbers[i]--,g);
             }
             if(g>1){
-                answer.add(g);
+                gcfs.add(g);
             }
             min--;
         }
-        Integer[] answerArr=answer.toArray(new Integer[0]);
-        Arrays.sort(answerArr);
-        for(int i:answerArr) System.out.print(i+" ");
+        StringBuilder answer=new StringBuilder();
+        for(int i:gcfs) answer.append(i+" ");
+        System.out.println(answer);
     }
 }
