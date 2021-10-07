@@ -26,7 +26,7 @@ public class Main {
         StringBuilder answer=new StringBuilder();
         for(int i:numbers){
             int g=gcf(first,i);
-            answer.append((first/g)).append("/").append((i/g)).append("\n");
+            answer.append(first/g).append("/").append(i/g).append("\n");
         }
         System.out.print(answer);
     }
