@@ -4,6 +4,7 @@
 //review:
 //      a%m = a - (a/m)*m = b%m = b - (b/m)*m
 //      => a-b = (a/m - b/m)*m
+//      * 약수는 대칭으로 곱하면 대상인 수가 된다.
 
 import java.util.*;
 import java.io.*;
@@ -19,23 +20,28 @@ public class Main {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
         int[] numbers=new int[n];
-        int min=numbers[0]=Integer.parseInt(br.readLine());
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             numbers[i]=Integer.parseInt(br.readLine());
-            if(min>numbers[i]) min=numbers[i];
         }
-        Arrays.sort(numbers);
-        for(int i=n-1;i>0;i--){
-            numbers[i]-=numbers[i-1];
+        for(int i=0;i+1<n;i++){
+            numbers[i]-=numbers[i+1];
+            if(numbers[i]<0) numbers[i]*=-1;
         }
-        int g=numbers[1];
-        for(int i=2;i<n;i++){
+        int g=numbers[0];
+        for(int i=1;i+1<n;i++){
             g=gcf(g,numbers[i]);
         }
-        StringBuilder answer=new StringBuilder();
-        for(int i=g;i>1;i--){
-            if(g%i==0) answer.insert(0,i+" ");
+        ArrayList<Integer> answerList=new ArrayList<Integer>();
+        for(int i=2;i*i<=g;i++){
+            if(g%i==0){
+                answerList.add(i);
+                if(g/i!=i) answerList.add(g/i);
+            }
         }
+        answerList.add(g);
+        Collections.sort(answerList);
+        StringBuilder answer=new StringBuilder();
+        for(int i:answerList) answer.append(i+" ");
         System.out.println(answer);
     }
 }
