@@ -8,10 +8,9 @@ import java.io.*;
 
 public class Main {
     static int gcf(int a,int b){
-        for(int n=Math.min(a,b);n>=1;n--){
-            if(a%n==0&&b%n==0) return n;
-        }
-        return -1;
+        if(a>b) return gcf(b,a);
+        if(a>0) return gcf(b%a,a);
+        return b;
     }
 
     static int lcm(int a,int b){
