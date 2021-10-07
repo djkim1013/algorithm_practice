@@ -7,28 +7,24 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int gcf(int a,int b){
-        for(int n=Math.min(a,b);n>=1;n--){
-            if(a%n==0&&b%n==0) return n;
+    static int lcm(int a,int b){
+        for(int n=Math.max(a,b);n<=a*b;n++){
+            if(n%a==0&&n%b==0) return n;
         }
         return -1;
     }
-
-    static int lcm(int a,int b){
-        return b*a/gcf(a,b);
+    static int gcf(int a,int b){
+        if(a>b) return gcf(b,a);
+        if(a>0) return gcf(b%a,a);
+        return b;
     }
-    
     public static void main(String[] args) throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        int t=Integer.parseInt(br.readLine());
-        StringTokenizer st=null;
-        StringBuilder answer=new StringBuilder();
-        while(t-->0){
-            st=new StringTokenizer(br.readLine());
-            int a=Integer.parseInt(st.nextToken());
-            int b=Integer.parseInt(st.nextToken());
-            answer.append(lcm(a,b)+"\n");
-        }
-        System.out.print(answer);
+        StringTokenizer st=new StringTokenizer(br.readLine());
+        int a=Integer.parseInt(st.nextToken());
+        int b=Integer.parseInt(st.nextToken());
+        int g=gcf(a,b);
+        System.out.println(g);
+        System.out.println(a*b/g);
     }
 }
