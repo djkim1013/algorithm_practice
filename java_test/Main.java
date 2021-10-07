@@ -12,6 +12,7 @@ public class Main {
         if(a>0) return gcf(b%a,a);
         return b;
     }
+    
     public static void main(String[] args) throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
@@ -23,13 +24,13 @@ public class Main {
         }
         Set<Integer> gcfs=new HashSet<Integer>();
         while(min>1){
-            int g=numbers[0]--;
+            int g=numbers[0];
             for(int i=1;i<n;i++){
-                g=gcf(numbers[i]--,g);
+                g=gcf(numbers[i],g);
+                if(g==1) break;
             }
-            if(g>1){
-                gcfs.add(g);
-            }
+            if(g>1) gcfs.add(g);
+            for(int i=0;i<n;i++) numbers[i]--;
             min--;
         }
         StringBuilder answer=new StringBuilder();
