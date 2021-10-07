@@ -11,11 +11,13 @@ public class Main {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
         StringTokenizer st=new StringTokenizer(br.readLine());
-        int[] arr=new int[n];
-        for(int i=0;i<n;i++){
-            arr[i]=Integer.parseInt(st.nextToken());
+        int min, max;
+        min=max=Integer.parseInt(st.nextToken());
+        for(int i=1;i<n;i++){
+            int input=Integer.parseInt(st.nextToken());
+            if(input<min) min=input;
+            if(input>max) max=input;
         }
-        Arrays.sort(arr);
-        System.out.println(arr[0]*arr[arr.length-1]);
+        System.out.println(min*max);
     }
 }
