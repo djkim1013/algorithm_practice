@@ -2,6 +2,7 @@
 //2021.10.07
 //category: 정수론 및 조합론
 //review:
+//      * string 연산을 피하자
 
 import java.util.*;
 import java.io.*;
@@ -25,7 +26,7 @@ public class Main {
         StringBuilder answer=new StringBuilder();
         for(int i:numbers){
             int g=gcf(first,i);
-            answer.append((first/g)+"/"+(i/g)+"\n");
+            answer.append((first/g)).append("/").append((i/g)).append("\n");
         }
         System.out.print(answer);
     }
