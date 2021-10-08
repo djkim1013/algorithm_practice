@@ -10,7 +10,7 @@ class Main{
     static int left,right;
     static int countCase(int l,int r){
         if(l==left) return 1;
-        if(r==right) return 0;
+        if(r==right-left+l) return 0;
         return countCase(l+1,r+1)+countCase(l,r+1);
     }
     public static void main(String[] args) throws Exception{
