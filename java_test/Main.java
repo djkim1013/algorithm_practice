@@ -9,8 +9,8 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    static int countFive(int n){
-        int ret=0;
+    static long countFive(long n){
+        long ret=0;
         while(n>=5){
             ret+=n/=5;
         }
@@ -19,8 +19,8 @@ class Main{
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer input=new StringTokenizer(br.readLine());
-        int n=Integer.parseInt(input.nextToken());
-        int m=Integer.parseInt(input.nextToken());
+        long n=Long.parseLong(input.nextToken());
+        long m=Long.parseLong(input.nextToken());
         System.out.println(countFive(n)-countFive(m)-countFive(n-m));
     }
 }
