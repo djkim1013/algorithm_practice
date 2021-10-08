@@ -10,7 +10,7 @@ class Main{
     static int left,right;
     static int countCase(int l,int r){
         if(l==left) return 1;
-        if(r==right-left+l) return 0;
+        if(r==right-left+l) return 1;
         return countCase(l+1,r+1)+countCase(l,r+1);
     }
     public static void main(String[] args) throws Exception{
@@ -24,6 +24,6 @@ class Main{
             right=Integer.parseInt(st.nextToken());
             answer.append(countCase(0,0)).append("\n");
         }
-        System.out.println(answer);
+        System.out.print(answer);
     }
 }
