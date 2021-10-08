@@ -27,8 +27,12 @@ class Main{
         StringTokenizer input=new StringTokenizer(br.readLine());
         int n=Integer.parseInt(input.nextToken());
         int m=Integer.parseInt(input.nextToken());
-        int answer=countFive(n)-countFive(m)-countFive(n-m);
-        answer=Math.min(answer,countTwo(n)-countTwo(m)-countTwo(n-m));
-        System.out.println(answer);
+        int five=countFive(n);
+        five-=countFive(m);
+        five-=countFive(n-m);
+        int two=countTwo(n);
+        two-=countTwo(m);
+        two-=countTwo(n-m);
+        System.out.println(Math.min(two,five));
     }
 }
