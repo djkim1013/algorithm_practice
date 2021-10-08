@@ -18,8 +18,8 @@ class Main{
             closet=new HashMap<String,Integer>();
             while(n-->0){
                 st=new StringTokenizer(br.readLine()," ");
+                st.nextToken();
                 String key=st.nextToken();
-                key=st.nextToken();
                 if(!closet.containsKey(key)) closet.put(key,1);
                 closet.put(key,closet.get(key)+1);    
             }
