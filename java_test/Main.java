@@ -13,26 +13,24 @@ class Main{
         int n=Integer.parseInt(input.nextToken());
         int m=Integer.parseInt(input.nextToken());
         int two=0, five=0;
-        for(int i=m;i<=n;i++){
+        for(int i=2;i<=n;i++){
             int j=i;
+            int t=0, f=0;
             while(j%2==0){
-                two++;
+                t++;
                 j/=2;
             }
             while(j%5==0){
-                five++;
+                f++;
                 j/=5;
             }
-        }
-        for(int i=2;i<=m;i++){
-            int j=i;
-            while(j%2==0){
-                two--;
-                j/=2;
+            if(i>m){
+                two+=t;
+                five+=f;
             }
-            while(j%5==0){
-                five--;
-                j/=5;
+            if(i<=n-m){
+                two-=t;
+                five-=f;
             }
         }
         System.out.println(Math.min(five,two));
