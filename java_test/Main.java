@@ -2,37 +2,25 @@
 //2021.10.08
 //category: 정수론 및 조합론
 //review:
+//      - 팩토리얼의 성질 상 n보다 작은수를 전부 포함하므로 계산 절차를 줄일 수 있다.
+//      - n까지의 자연수 중 5의 배수보다 2의 배수가 항상 많다.
 
 import java.util.*;
 import java.io.*;
 
 class Main{
+    static int countFive(int n){
+        int ret=0;
+        while(n>=5){
+            ret+=n/=5;
+        }
+        return ret;
+    }
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer input=new StringTokenizer(br.readLine());
         int n=Integer.parseInt(input.nextToken());
         int m=Integer.parseInt(input.nextToken());
-        int two=0, five=0;
-        for(int i=2;i<=n;i++){
-            int j=i;
-            int t=0, f=0;
-            while(j%2==0){
-                t++;
-                j/=2;
-            }
-            while(j%5==0){
-                f++;
-                j/=5;
-            }
-            if(i>m){
-                two+=t;
-                five+=f;
-            }
-            if(i<=n-m){
-                two-=t;
-                five-=f;
-            }
-        }
-        System.out.println(Math.min(five,two));
+        System.out.println(countFive(n)-countFive(m)-countFive(n-m));
     }
 }
