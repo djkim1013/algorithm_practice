@@ -16,7 +16,7 @@ class Main{
                 twoFive[i][0]=twoFive[i/2][0]+1;
             }
             if(i%5==0){
-                twoFive[i][1]=twoFive[i/5][0]+1;
+                twoFive[i][1]=twoFive[i/5][1]+1;
             }
         }
         int two=0,five=0;
