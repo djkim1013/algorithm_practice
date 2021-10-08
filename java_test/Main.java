@@ -1,4 +1,4 @@
-//BOJ: 9375
+//BOJ: 1676
 //2021.10.08
 //category: 정수론 및 조합론
 //review:
@@ -7,28 +7,23 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    public static void main(String[] args)throws Exception{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        int t=Integer.parseInt(br.readLine());
-        StringTokenizer st;
-        Map<String,Integer> closet;
-        StringBuilder answer=new StringBuilder();
-        while(t-->0){
-            int n=Integer.parseInt(br.readLine());
-            closet=new HashMap<String,Integer>();
-            while(n-->0){
-                st=new StringTokenizer(br.readLine()," ");
-                st.nextToken();
-                String key=st.nextToken();
-                if(!closet.containsKey(key)) closet.put(key,1);
-                closet.put(key,closet.get(key)+1);    
+    static public void main(String[] args)throws Exception{
+        int c,n=System.in.read()&15;
+        while((c=System.in.read())>=32) n=(n<<3)+(n<<1)+c&15;
+        int[][] twoFive=new int[n+1][2];
+        for(int i=2;i<=n;i++){
+            if(i%2==0){
+                twoFive[i][0]=twoFive[i/2][0]+1;
             }
-            int allCase=1;
-            for(String key:closet.keySet()){
-                allCase*=closet.get(key);
+            if(i%5==0){
+                twoFive[i][1]=twoFive[i/5][0]+1;
             }
-            answer.append(--allCase).append("\n");
         }
-        System.out.print(answer);
+        int two=0,five=0;
+        for(int[] arr:twoFive){
+            two+=arr[0];
+            five+=arr[1];
+        }
+        System.out.println(Math.min(two,five));
     }
 }
