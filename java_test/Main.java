@@ -8,8 +8,8 @@ import java.io.*;
 
 class Main{
     static public void main(String[] args)throws Exception{
-        int c,n=System.in.read()&15;
-        while((c=System.in.read())>=32) n=(n<<3)+(n<<1)+c&15;
+        int c,n=System.in.read()-'0';
+        while((c=System.in.read())>='0') n=n*10+c-'0';
         int[][] twoFive=new int[n+1][2];
         for(int i=2;i<=n;i++){
             if(i%2==0){
