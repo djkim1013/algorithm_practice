@@ -35,15 +35,11 @@ class Main{
         int n=Integer.parseInt(input.nextToken());
         int m=Integer.parseInt(input.nextToken());
         int two=0, five=0;
-        for(int i=2;i<=n;i++){
+        for(int i=m;i<=n;i++){
             two+=countTwo(i);
             five+=countFive(i);
         }
         for(int i=2;i<=m;i++){
-            two-=countTwo(i);
-            five-=countFive(i);
-        }
-        for(int i=2;i<=n-m;i++){
             two-=countTwo(i);
             five-=countFive(i);
         }
