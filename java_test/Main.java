@@ -11,21 +11,21 @@ class Main{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int t=Integer.parseInt(br.readLine());
         StringTokenizer st;
-        Map<String,ArrayList<String>> closet;
+        Map<String,Integer> closet;
         StringBuilder answer=new StringBuilder();
         while(t-->0){
             int n=Integer.parseInt(br.readLine());
-            closet=new HashMap<String,ArrayList<String>>();
+            closet=new HashMap<String,Integer>();
             while(n-->0){
                 st=new StringTokenizer(br.readLine()," ");
-                String item=st.nextToken();
-                String kind=st.nextToken();
-                if(!closet.containsKey(kind)) closet.put(kind,new ArrayList<String>());
-                closet.get(kind).add(item);    
+                String key=st.nextToken();
+                key=st.nextToken();
+                if(!closet.containsKey(key)) closet.put(key,1);
+                closet.put(key,closet.get(key)+1);    
             }
             int allCase=1;
             for(String key:closet.keySet()){
-                allCase*=closet.get(key).size()+1;
+                allCase*=closet.get(key);
             }
             answer.append(--allCase).append("\n");
         }
