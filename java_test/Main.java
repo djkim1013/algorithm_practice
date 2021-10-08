@@ -1,4 +1,4 @@
-//BOJ: 11051
+//BOJ: 1010
 //2021.10.08
 //category: 정수론 및 조합론
 //review:
@@ -7,23 +7,23 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    static int[][] cache;
-    static int bico(int n, int k){
-        if(k<0||k>n) return 0;
-        if(k>n/2) return bico(n,n-k);
-        if(cache[n][k]>0) return cache[n][k];
-        if(k==0||k==n) return cache[n][k]=1;
-        return cache[n][k]=(bico(n-1,k-1)+bico(n-1,k))%10007;
+    static int left,right;
+    static int countCase(int l,int r){
+        if(l==left) return 1;
+        if(r==right) return 0;
+        return countCase(l+1,r+1)+countCase(l,r+1);
     }
-    public static void main(String[] arg)throws Exception{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String[] input = br.readLine().split(" ");
-        int n = Integer.parseInt(input[0]);
-        int k = Integer.parseInt(input[1]);
-        cache = new int[n+1][];
-        for(int i=1;i<=n;i++){
-            cache[i] = new int[i/2+1];
+    public static void main(String[] args) throws Exception{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        int t=Integer.parseInt(br.readLine());
+        StringTokenizer st;
+        StringBuilder answer=new StringBuilder();
+        while(t-->0){
+            st=new StringTokenizer(br.readLine()," ");
+            left=Integer.parseInt(st.nextToken());
+            right=Integer.parseInt(st.nextToken());
+            answer.append(countCase(0,0)).append("\n");
         }
-        System.out.println(bico(n,k));
+        System.out.println(answer);
     }
 }
