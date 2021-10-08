@@ -1,33 +1,32 @@
-//BOJ: 1010
+//BOJ: 9375
 //2021.10.08
 //category: 정수론 및 조합론
 //review:
-//      - 동적 계획법으로 해결
 
 import java.util.*;
 import java.io.*;
 
 class Main{
-    static int[][] cache;
-    static int left,right;
-    static int countCase(int l,int r){
-        if(l==left) return 1;
-        if(r==right-left+l) return 1;
-        if(cache[l][r]!=-1) return cache[l][r];
-        return cache[l][r]=countCase(l+1,r+1)+countCase(l,r+1);
-    }
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int t=Integer.parseInt(br.readLine());
         StringTokenizer st;
+        Map<String,ArrayList<String>> closet=new HashMap<String,ArrayList<String>>();
         StringBuilder answer=new StringBuilder();
         while(t-->0){
-            st=new StringTokenizer(br.readLine()," ");
-            left=Integer.parseInt(st.nextToken());
-            right=Integer.parseInt(st.nextToken());
-            cache=new int[left][right];
-            for(int[] arr:cache) Arrays.fill(arr,-1);
-            answer.append(countCase(0,0)).append("\n");
+            int n=Integer.parseInt(br.readLine());
+            while(n-->0){
+                st=new StringTokenizer(br.readLine()," ");
+                String item=st.nextToken();
+                String kind=st.nextToken();
+                if(!closet.containsKey(kind)) closet.put(kind,new ArrayList<String>());
+                closet.get(kind).add(item);    
+            }
+            int allCase=1;
+            for(String key:closet.keySet()){
+                allCase*=closet.get(key).size();
+            }
+            answer.append(--allCase).append("\n");
         }
         System.out.print(answer);
     }
