@@ -32,13 +32,9 @@ class Main{
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringBuilder answer=new StringBuilder();
-        while(true){
-            StringBuilder input=new StringBuilder(br.readLine());
-            if(input.toString().equals("."))break;
-            while(input.charAt(input.length()-1)!='.'){
-                input.append(br.readLine());
-            }
-            answer.append(checkVPS(input.toString()));
+        String input;
+        while(!(input=br.readLine()).equals(".")){
+            answer.append(checkVPS(input));
         }
         System.out.print(answer);
     }
