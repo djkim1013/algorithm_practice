@@ -1,4 +1,4 @@
-//BOJ 1874
+//BOJ 17298
 //2021.10.12
 //category: 스택
 //review:
@@ -16,19 +16,21 @@ class Main{
             arr[i]=Integer.parseInt(st.nextToken());
         }
         Stack<Integer> rNum=new Stack<Integer>();
-        StringBuilder answer=new StringBuilder();
+        int[] nge=new int[n];
         for(int i=n-1;i>=0;i--){
             int cur=arr[i];
             while(!rNum.empty()&&cur>=rNum.peek()){
                 rNum.pop();
             }
             if(rNum.empty()){
-                answer.insert(0,"-1 ");
+                nge[i]=-1;
             }else{
-                answer.insert(0," ").insert(0,rNum.peek());
+                nge[i]=rNum.peek();
             }
             rNum.push(cur);
         }
-        System.out.println(answer.toString());
+        StringBuilder answer=new StringBuilder();
+        for(int i:nge) answer.append(i).append(" ");
+        System.out.println(answer);
     }
 }
