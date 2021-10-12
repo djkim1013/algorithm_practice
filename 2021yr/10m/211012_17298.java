@@ -15,19 +15,20 @@ class Main{
         for(int i=0;i<n;i++){
             arr[i]=Integer.parseInt(st.nextToken());
         }
-        Stack<Integer> rNum=new Stack<Integer>();
+        int[] rNum=new int[n];
         int[] nge=new int[n];
+        int top=-1;
         for(int i=n-1;i>=0;i--){
             int cur=arr[i];
-            while(!rNum.empty()&&cur>=rNum.peek()){
-                rNum.pop();
+            while(top>=0&&cur>=rNum[top]){
+                top--;
             }
-            if(rNum.empty()){
+            if(top<0){
                 nge[i]=-1;
             }else{
-                nge[i]=rNum.peek();
+                nge[i]=rNum[top];
             }
-            rNum.push(cur);
+            rNum[++top]=cur;
         }
         StringBuilder answer=new StringBuilder();
         for(int i:nge) answer.append(i).append(" ");
