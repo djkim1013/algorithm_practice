@@ -1,4 +1,4 @@
-//BOJ 4949
+//BOJ 1874
 //2021.10.12
 //category: 스택
 //review:
@@ -7,39 +7,32 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    static final Map<Character,Character> prPair=new HashMap<Character,Character>(){{
-        put(')','(');
-        put('}','{');
-        put(']','[');
-    }};
-    static String checkVPS(String input){
-        Stack<Character> stack=new Stack<Character>();
-        for(int i=0;i<input.length();i++){
-            char c=input.charAt(i);
-            if(prPair.containsKey(c)){
-                if(stack.isEmpty()||stack.peek()!=prPair.get(c)){
-                    return "no\n";
-                }else{
-                    stack.pop();
-                }
-            }else if(prPair.containsValue(c)){
-                stack.push(c);
+    static final String push = "+\n", pop = "-\n", impossible = "NO\n";
+    static String makeSeq(int[] goal){
+        StringBuilder ret = new StringBuilder();
+        Stack<Integer> stack = new Stack<Integer>();
+        int cur=1;
+        stack.push(cur);
+        for(int i = 0; i < goal.length; i++){
+            if(stack.isEmpty()) return impossible;
+            while(stack.peek() < goal[i]){
+                ret.append(push);
+                stack.push(cur++);
             }
+            if(stack.peek()!=goal[i]) return impossible;
+            ret.append(pop);
+            stack.pop();
+
         }
-        if(stack.isEmpty()) return "yes\n";
-        return "no\n";
+        return ret.toString();
     }
-    public static void main(String[] args)throws Exception{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder answer=new StringBuilder();
-        while(true){
-            StringBuilder input=new StringBuilder(br.readLine());
-            if(input.toString().equals("."))break;
-            while(input.charAt(input.length()-1)!='.'){
-                input.append(br.readLine());
-            }
-            answer.append(checkVPS(input.toString()));
+    public static void main( String[] args ) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int[] goal = new int[n];
+        for(int i = 0; i < n; i++){
+            goal[i] = Integer.parseInt(br.readLine());
         }
-        System.out.print(answer);
+        System.out.print(makeSeq(goal));
     }
 }
