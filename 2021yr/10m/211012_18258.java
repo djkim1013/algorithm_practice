@@ -13,9 +13,12 @@ class Main{
         StringBuilder answer=new StringBuilder();
         Queue<Integer> que=new LinkedList<Integer>();
         int back=-1;
+        String input=null;
+        char command='0';
         while(n-->0){
-            String input=br.readLine();
-            switch(input.charAt(0)){
+            input=br.readLine();
+            command=input.charAt(0);
+            switch(command){
                 case 'e':{
                     answer.append(que.isEmpty()?"1\n":"0\n");
                     break;
