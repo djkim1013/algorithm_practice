@@ -29,7 +29,7 @@ class Main{
                     break;
                 }
                 case 'b':{
-                    answer.append(back).append("\n");
+                    answer.append(que.isEmpty()?-1:back).append("\n");
                     break;
                 }
                 case 'p':{
@@ -37,7 +37,7 @@ class Main{
                         back=Integer.parseInt(input.substring(5));
                         que.offer(back);
                     }else{
-                        answer.append(que.isEmpty()?back=-1:que.poll()).append("\n");
+                        answer.append(que.isEmpty()?-1:que.poll()).append("\n");
                     }
                 }
             }

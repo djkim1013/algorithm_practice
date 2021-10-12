@@ -11,39 +11,33 @@ class Main{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
         StringBuilder answer=new StringBuilder();
-        StringTokenizer st=null;
         Queue<Integer> que=new LinkedList<Integer>();
         int back=-1;
         while(n-->0){
-            st=new StringTokenizer(br.readLine());
-            switch(st.nextToken()){
-                case "push":{
-                    back=Integer.parseInt(st.nextToken());
-                    que.offer(back);
-                    break;
-                }
-                case "empty":{
+            String input=br.readLine();
+            switch(input.charAt(0)){
+                case 'e':{
                     answer.append(que.isEmpty()?"1\n":"0\n");
                     break;
                 }
-                case "size":{
+                case 's':{
                     answer.append(que.size()).append("\n");
                     break;
                 }
-                case "front":{
-                    if(que.isEmpty()) answer.append("-1\n");
-                    else answer.append(que.peek()).append("\n");
+                case 'f':{
+                    answer.append(que.isEmpty()?-1:que.peek()).append("\n");
                     break;
                 }
-                case "back":{
-                    answer.append(back).append("\n");
+                case 'b':{
+                    answer.append(que.isEmpty()?-1:back).append("\n");
                     break;
                 }
-                default :{
-                    if(que.isEmpty()) answer.append("-1\n");
-                    else{
-                        answer.append(que.poll()).append("\n");
-                        if(que.isEmpty()) back=-1;
+                case 'p':{
+                    if(input.charAt(1)=='u'){
+                        back=Integer.parseInt(input.substring(5));
+                        que.offer(back);
+                    }else{
+                        answer.append(que.isEmpty()?-1:que.poll()).append("\n");
                     }
                 }
             }
