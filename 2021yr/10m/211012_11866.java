@@ -19,8 +19,7 @@ class Main{
         int cur=0;
         while(n>1){
             cur=(cur+k-1)%(n--);
-            answer.append(round.get(cur)).append(", ");
-            round.remove(cur);
+            answer.append(round.remove(cur)).append(", ");
         }
         answer.append(round.get(0)).append(">");
         System.out.println(answer);
