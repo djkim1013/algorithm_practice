@@ -8,16 +8,21 @@ import java.util.*;
 import java.io.*;
 
 class Main{
+    static int[] cache;
     static int pow(int a,int b,int c){
-        if(b==0) return 1;
-        if(b==1) return a%c;
-        return (int)((long)pow(a,b/2,c)*pow(a,b-b/2,c)%c);
+        if(cache[b]>0) return cache[b];
+        if(b==0) return cache[b]=1;
+        if(b==1) return cache[b]=a%c;
+        if(b==2) return cache[b]=(int)((long)a*a%c);
+        cache[b]=(int)((long)pow(a,b/2,c)*pow(a,b-b/2,c)%c);
+        return cache[b];
     }
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st=new StringTokenizer(br.readLine());
         int a=Integer.parseInt(st.nextToken());
         int b=Integer.parseInt(st.nextToken());
+        cache=new int[b+1];
         int c=Integer.parseInt(st.nextToken());
         System.out.println(pow(a,b,c));
     }
