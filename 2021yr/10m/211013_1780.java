@@ -13,10 +13,6 @@ class Main{
 
     static void cut(int c,int r,int len){
         int first=paper[c][r];
-        if(len==1){
-            answer[first+1]++;
-            return;
-        }
         for(int i=c;i<c+len;i++){
             for(int j=r;j<r+len;j++){
                 if(paper[i][j]!=first){
