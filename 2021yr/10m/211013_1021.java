@@ -17,19 +17,23 @@ class Main{
         for(int i=0;i<m;i++){
             target[i]=Integer.parseInt(st.nextToken());
         }
-        Deque<Integer> deq=new LinkedList<Integer>();
+        LinkedList<Integer> deq=new LinkedList<Integer>();
         for(int i=1;i<=n;i++){
             deq.add(i);
         }
         int answer=0;
         for(int i=0;i<m;i++){
-            int move=0;
-            while(deq.peekFirst()!=target[i]){
-                deq.addLast(deq.pollFirst());
-                move++;
+            if(deq.indexOf(target[i])>n/2){
+                while(deq.peekFirst()!=target[i]){
+                    deq.addFirst(deq.pollLast());
+                    answer++;
+                }
+            }else{
+                while(deq.peekFirst()!=target[i]){
+                    deq.addLast(deq.pollFirst());
+                    answer++;
+                }
             }
-            move=Math.min(move,Math.abs(n-move));
-            answer+=move;
             deq.removeFirst();
             n--;
         }
