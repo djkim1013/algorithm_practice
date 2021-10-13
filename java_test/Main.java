@@ -23,15 +23,16 @@ class Main{
         }
         int answer=0;
         for(int i=0;i<m;i++){
-            int move=deq.indexOf(target[i]);
+            int tg=target[i];
+            int move=deq.indexOf(tg);
             if(move>n/2){
-                answer+=move=n-move;
-                while(move-->0){
+                answer+=n-move;
+                while(deq.peekFirst()!=tg){
                     deq.addFirst(deq.pollLast());
                 }
             }else{
                 answer+=move;
-                while(move-->0){
+                while(deq.peekFirst()!=tg){
                     deq.addLast(deq.pollFirst());
                 }
             }
