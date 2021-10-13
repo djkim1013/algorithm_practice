@@ -2,14 +2,16 @@
 //2021.10.13
 //category: 분할정복
 //review:
+//      - a^b = a^(b/2)*a^(b/2)
 
 import java.util.*;
 import java.io.*;
 
 class Main{
     static int pow(int a,int b,int c){
-        if(b==1) return a;
-        return (int)((long)a*pow(a,b-1,c)%c);
+        if(b==0) return 1;
+        if(b==1) return a%c;
+        return (int)((long)pow(a,b/2,c)*pow(a,b-b/2,c)%c);
     }
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
