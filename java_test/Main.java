@@ -7,20 +7,20 @@
 import java.io.*;
 
 class Main{
-    static final int MOD=1000000007;
-    static int[][] cache;
-    static int bico(int n,int k){
-        if(k<0||k>n) return 0;
-        if(k==0||k==n) return 1;
-        if(k>n/2) return bico(n,n-k);
-        if(cache[n][k]>0) return cache[n][k];
-        return cache[n][k]=(bico(n-1,k)+bico(n-1,k-1))%MOD;
-    }
     public static void main(String[] args)throws Exception{
         String input=(new BufferedReader(new InputStreamReader(System.in))).readLine();
         int n=Integer.parseInt(input.substring(0,input.indexOf(" ")));
         int k=Integer.parseInt(input.substring(input.indexOf(" ")+1));
-        cache=new int[n+1][n/2+1];
-        System.out.println(bico(n,k));
+        final int MOD=1000000007;
+        int[] cur=new int[n+1];
+        cur[0]=1;
+        for(int i=1;i<=n;i++){
+            int[] next=new int[i+1];
+            for(int j=0;j<i;j++){
+                next[j]=(cur[j]+cur[j+1])%MOD;
+            }
+            cur=next;
+        }
+        System.out.println(cur[k]);
     }
 }
