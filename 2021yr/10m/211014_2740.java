@@ -12,9 +12,8 @@ class Main{
         StringTokenizer st=new StringTokenizer(br.readLine());
         int aRow=Integer.parseInt(st.nextToken());
         int aCol=Integer.parseInt(st.nextToken());
-        int[][] matrixA=new int[aRow][aCol];
-        StringBuilder answer=new StringBuilder();
-        
+    
+        int[][] matrixA=new int[aRow][aCol];    
         for(int i=0;i<aRow;i++){
             st=new StringTokenizer(br.readLine());
             for(int j=0;j<aCol;j++){
@@ -26,8 +25,6 @@ class Main{
         st.nextToken();
         int bCol=Integer.parseInt(st.nextToken());
         int[][] matrixB=new int[aCol][bCol];
-        int[][] matrixSum=new int[aRow][bCol];
-        
         for(int i=0;i<aCol;i++){
             st=new StringTokenizer(br.readLine());
             for(int j=0;j<bCol;j++){
@@ -35,17 +32,14 @@ class Main{
             }
         }
         
+        StringBuilder answer=new StringBuilder();
         for(int i=0;i<aRow;i++){
             for(int j=0;j<bCol;j++){
+                int sum=0;
                 for(int k=0;k<aCol;k++){
-                    matrixSum[i][j]+=matrixA[i][k]*matrixB[k][j];
+                    sum+=matrixA[i][k]*matrixB[k][j];
                 }
-            }
-        }
-        
-        for(int[] row:matrixSum){
-            for(int i:row){
-                answer.append(i).append(" ");
+                answer.append(sum).append(" ");
             }
             answer.append("\n");
         }
