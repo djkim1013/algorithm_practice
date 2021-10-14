@@ -25,19 +25,10 @@ class Main{
 
     static int[][] power(int[][] matrix,long b){
         if(b==1) return matrix;
-        int[][] ret;
-        if(b==0){
-            ret=new int[n][n];
-            for(int i=0;i<n;i++) ret[i][i]=1;
-            return ret;
-        }
-        ret=new int[n][];
-        for(int i=0;i<n;i++) ret[i]=matrix[i].clone();
-        long l=1;
-        for(;l*2<b;l*=2){
-            ret=multiple(ret,ret);
-        }
-        return multiple(ret,power(a,b-l));
+        int[][] ret=power(matrix,b/2);
+        ret=multiple(ret,ret);
+        if(b%2==1) ret=multiple(ret,a);
+        return ret;
     }
 
     public static void main(String[] args)throws Exception{
