@@ -3,41 +3,54 @@
 //category: 분할정복
 //review:
 
-//import java.util.*;
+import java.util.*;
 import java.io.*;
 
 class Main{
+    static int n;
+    static int[][] a;
+    static int[][] multiple(int[][] a,int[][] b){
+        int[][] ret=new int[n][n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                for(int k=0;k<n;k++){
+                    ret[i][j]+=a[i][k]*b[k][j]%1000;
+                    ret[i][j]%=1000;
+                }
+            }
+        }
+        return ret;
+    }
+    static int[][] power(int[][] matrix,long b){
+        if(b==1) return matrix;
+        if(b==0){
+            int[][] ret=new int[n][n];
+            for(int i=0;i<n;i++) ret[i][i]=1;
+            return ret;
+        }
+        long l=1;
+        for(;l*2<b;l*=2){
+            matrix=multiple(matrix,matrix);
+        }
+        return multiple(matrix,power(a,b-l));
+    }
+
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        String[] input=br.readLine().split(" ");
-        int n=Integer.parseInt(input[0]);
-        long b=Long.parseLong(input[1]);
-        int[][] a=new int[n][n], matrix=new int[n][n];
+        StringTokenizer st=new StringTokenizer(br.readLine());
+        n=Integer.parseInt(st.nextToken());
+        long b=Long.parseLong(st.nextToken());
+        int[][] matrix=new int[n][n];
+        a=new int[n][n];
         for(int i=0;i<n;i++){
-            input=br.readLine().split(" ");
+            st=new StringTokenizer(br.readLine());
             for(int j=0;j<n;j++){
-                a[i][j]=Integer.parseInt(input[j]);
+                a[i][j]=Integer.parseInt(st.nextToken());
+                matrix[i][j]=a[i][j];
             }
-            matrix[i][i]=1;
         }
+        matrix=power(a,b);
         StringBuilder answer=new StringBuilder();
-        while(b-->0){
-            int[][] temp=new int[n][n];
-            for(int i=0;i<n;i++){
-                for(int j=0;j<=i;j++){
-                    for(int k=0;k<n;k++){
-                        temp[i][j]+=matrix[i][k]*a[k][j]%1000;
-                        temp[i][j]%=1000;
-                    }
-                }
-            }
-            for(int i=0;i<n;i++){
-                for(int j=0;j<=i;j++){
-                    temp[j][i]=temp[i][j];
-                }
-            }
-            matrix=temp;
-        }
         for(int[] row:matrix){
             for(int i:row) answer.append(i).append(" ");
             answer.append("\n");
