@@ -12,17 +12,15 @@ class Main{
         int n=Integer.parseInt(input.substring(0,input.indexOf(" ")));
         int k=Integer.parseInt(input.substring(input.indexOf(" ")+1));
         final int MOD=1000000007;
-        int[] cur=new int[1];
-        cur[0]=1;
-        for(int i=2;i<=n;i++){
-            int[] next=new int[i/2+1];
-            next[0]=1;
-            for(int j=1;j<cur.length;j++){
-                next[j]=(cur[j]+cur[j-1])%MOD;
+        int[] arr=new int[(n+1)/2+1];
+        arr[0]=1;
+        for(int i=1;i<=n;i++){
+            for(int j=i/2;j>0;j--){
+                arr[j]=(arr[j]+arr[j-1])%MOD;
             }
-            if(i%2==0) next[next.length-1]=(2*cur[cur.length-1])%MOD;
-            cur=next;
+            if(i%2==1) arr[i/2+1]=arr[i/2];
+            //System.out.println(Arrays.toString(arr));
         }
-        System.out.println(cur[Math.min(k,n-k-1)]);
+        System.out.println(arr[k>n-k?n-k:k]);
     }
 }
