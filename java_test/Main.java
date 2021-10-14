@@ -1,46 +1,45 @@
-//BOJ 2740
+//BOJ 10830
 //2021.10.14
 //category: 분할정복
 //review:
 
-import java.util.*;
+//import java.util.*;
 import java.io.*;
 
 class Main{
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        int aRow=Integer.parseInt(st.nextToken());
-        int aCol=Integer.parseInt(st.nextToken());
-    
-        int[][] matrixA=new int[aRow][aCol];    
-        for(int i=0;i<aRow;i++){
-            st=new StringTokenizer(br.readLine());
-            for(int j=0;j<aCol;j++){
-                matrixA[i][j]=Integer.parseInt(st.nextToken());
+        String[] input=br.readLine().split(" ");
+        int n=Integer.parseInt(input[0]);
+        long b=Long.parseLong(input[1]);
+        int[][] a=new int[n][n], matrix=new int[n][n];
+        for(int i=0;i<n;i++){
+            input=br.readLine().split(" ");
+            for(int j=0;j<n;j++){
+                a[i][j]=Integer.parseInt(input[j]);
             }
+            matrix[i][i]=1;
         }
-        
-        st=new StringTokenizer(br.readLine());
-        st.nextToken();
-        int bCol=Integer.parseInt(st.nextToken());
-        int[][] matrixB=new int[aCol][bCol];
-        for(int i=0;i<aCol;i++){
-            st=new StringTokenizer(br.readLine());
-            for(int j=0;j<bCol;j++){
-                matrixB[i][j]=Integer.parseInt(st.nextToken());
-            }
-        }
-        
         StringBuilder answer=new StringBuilder();
-        for(int i=0;i<aRow;i++){
-            for(int j=0;j<bCol;j++){
-                int sum=0;
-                for(int k=0;k<aCol;k++){
-                    sum+=matrixA[i][k]*matrixB[k][j];
+        while(b-->0){
+            int[][] temp=new int[n][n];
+            for(int i=0;i<n;i++){
+                for(int j=0;j<=i;j++){
+                    for(int k=0;k<n;k++){
+                        temp[i][j]+=matrix[i][k]*a[k][j]%1000;
+                        temp[i][j]%=1000;
+                    }
                 }
-                answer.append(sum).append(" ");
             }
+            for(int i=0;i<n;i++){
+                for(int j=0;j<=i;j++){
+                    temp[j][i]=temp[i][j];
+                }
+            }
+            matrix=temp;
+        }
+        for(int[] row:matrix){
+            for(int i:row) answer.append(i).append(" ");
             answer.append("\n");
         }
         System.out.print(answer);
