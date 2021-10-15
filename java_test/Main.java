@@ -2,9 +2,6 @@
 //2021.10.15
 //category: 분할정복
 //review:
-//      - 행렬의 제곱을 이용한다.
-//       : {{An+2}, {An+1}} = {{1, 1},{1, 0}}x{{An+1}, {An}}
-//      - n=1 일때 A0이 호출됨에 주의
 
 import java.io.*;
 import java.util.*;
@@ -17,17 +14,18 @@ class Main{
         while((input=br.readLine()).charAt(0)!='0'){
             StringTokenizer st=new StringTokenizer(input);
             int n=Integer.parseInt(st.nextToken());
-            int[] histogram=new int[n];
-            for(int i=0;i<n;i++) histogram[i]=Integer.parseInt(st.nextToken());
-            int max=-1;
+            long[] histogram=new long[n];
+            for(int i=0;i<n;i++) histogram[i]=Long.parseLong(st.nextToken());
+            long max=-1;
             for(int i=0;i<n;i++){
-                int h=histogram[i];
-                int temp=0;
-                for(int j=i-1;j>0;j--){
+                long h=histogram[i];
+                long temp=h;
+                int j;
+                for(j=i-1;j>=0;j--){
                     if(histogram[j]<h) break;
                     temp+=h;
                 }
-                for(int j=i;j<n;j++){
+                for(j=i+1;j<n;j++){
                     if(histogram[j]<h) break;
                     temp+=h;
                 }
