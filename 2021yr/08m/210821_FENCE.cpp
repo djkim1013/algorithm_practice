@@ -13,25 +13,25 @@ int main(){
   cin>>C;
   for (int c=0;c<C;c++){
     int answer=-1;
-	int n=0;
-	cin>>n;  
-	for(int i=0;i<n;i++){
-	  cin>>fence[i];
-	}
-	for(int i=0;i<n;i++){
-	  int height=fence[i];
-	  int size=height;
-	  for(int j=i-1;j>=0;j--){
-		if(fence[j]<height)break;
-		size+=height;
-	  }
-	  for(int j=i+1;j<n;j++){
-		if(fence[j]<height)break;
-		size+=height;
-	  }
-	  if(answer<size)answer=size;
-	}
-    cout<<answer<<endl;
+		int n=0;
+		cin>>n;  
+		for(int i=0;i<n;i++){
+			cin>>fence[i];
+		}
+		for(int i=0;i<n;i++){
+			int height=fence[i];
+			int size=height;
+			for(int j=i-1;j>=0;j--){
+				if(fence[j]<height)break;
+				size+=height;
+			}
+			for(int j=i+1;j<n;j++){
+				if(fence[j]<height)break;
+				size+=height;
+			}
+			if(answer<size)answer=size;
+		}
+		cout<<answer<<endl;
   }
   return 0;
 }
