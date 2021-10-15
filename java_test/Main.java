@@ -7,29 +7,26 @@ import java.io.*;
 import java.util.*;
 
 class Main{
+    
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         String input;
         StringBuilder answer=new StringBuilder();
+        StringTokenizer st;
         while((input=br.readLine()).charAt(0)!='0'){
-            StringTokenizer st=new StringTokenizer(input);
+            st=new StringTokenizer(input);
             int n=Integer.parseInt(st.nextToken());
-            long[] histogram=new long[n];
-            for(int i=0;i<n;i++) histogram[i]=Long.parseLong(st.nextToken());
-            long max=-1;
+            int[] arr=new int[n];
+            for(int i=0;i<n;i++) arr[i]=Integer.parseInt(st.nextToken());
+            long max=0;
+            Stack<Integer> stk=new Stack<Integer>();
             for(int i=0;i<n;i++){
-                long h=histogram[i];
-                long temp=h;
-                int j;
-                for(j=i-1;j>=0;j--){
-                    if(histogram[j]<h) break;
-                    temp+=h;
+                if(stk.isEmpty()||stk.peek()<=arr[i]){
+                    stk.add(arr[i]);
+                }else{
+                    max=Math.max(max,(long)stk.peek()*stk.size());
+                    stk.add(arr[i]);
                 }
-                for(j=i+1;j<n;j++){
-                    if(histogram[j]<h) break;
-                    temp+=h;
-                }
-                max=Math.max(temp,max);
             }
             answer.append(max).append("\n");
         }
