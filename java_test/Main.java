@@ -3,30 +3,50 @@
 //category: 분할정복
 //review:
 
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 class Main{
+    static final long MAXD=2*20000*20000;
+
     static long distance(int[] a,int[] b){
         long ret=(a[0]-b[0])*(a[0]-b[0]);
         ret+=(a[1]-b[1])*(a[1]-b[1]);
         return ret;
     }
+
+    static long minDistance(ArrayList<int[]> arr,int start,int end){
+        if(end-start<3){
+            long ret=MAXD;
+            for(int i=start;i<end;i++){
+                for(int j=i+1;j<=end;j++){
+                    ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
+                }
+            }
+            return ret;
+        }
+        int mid=(start+end)/2;
+        return Math.min(minDistance(arr,start,mid),minDistance(arr,mid+1,end));
+    }
+
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
-        int[][] arr=new int[n][2];
+        ArrayList<int[]> arr=new ArrayList<int[]>();
         for(int i=0;i<n;i++){
             String input=br.readLine();
-            arr[i][0]=Integer.parseInt(input.substring(0,input.indexOf(" ")));
-            arr[i][1]=Integer.parseInt(input.substring(input.indexOf(" ")+1));
+            int[] temp=new int[2];
+            temp[0]=Integer.parseInt(input.substring(0,input.indexOf(" ")));
+            temp[1]=Integer.parseInt(input.substring(input.indexOf(" ")+1));
+            arr.add(temp);
         }
-        long answer=2*20000*20000;
-        for(int i=0;i+1<n;i++){
-            for(int j=i+1;j<n;j++){
-                answer=Math.min(answer,distance(arr[i],arr[j]));
+        Collections.sort(arr,new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                if(a[0]==b[0]) return a[1]-b[1];
+                return a[0]-b[0];
             }
-        }
-        System.out.println(answer);
+        });
+        System.out.println(minDistance(arr,0,n-1));
     }
 }
