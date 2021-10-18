@@ -14,6 +14,7 @@ class Main{
         ret+=(a[1]-b[1])*(a[1]-b[1]);
         return ret;
     }
+
     static long minDistanceX(ArrayList<int[]> arr,int start,int end){
         if(end-start<3){
             long ret=MAXD;
@@ -26,21 +27,28 @@ class Main{
         }
         int mid=(start+end)/2;
         long ret=Math.min(minDistanceX(arr,start,mid),minDistanceX(arr,mid+1,end));
-        ArrayList<int[]> subLeft=new ArrayList<int[]>();
-        ArrayList<int[]> subRight=new ArrayList<int[]>();
-        for(int i=mid;i>=start;i--){
-            long dx=arr.get(mid)[0]-arr.get(i)[0];
+        int s=mid,e=mid+1;
+        for(;s>start;s--){
+            long dx=arr.get(mid)[0]-arr.get(s)[0];
             if(dx*dx>ret) break;
-            subLeft.add(arr.get(i));
+            arr.add(arr.get(s));
         }
-        for(int i=mid+1;i<=end;i++){
-            long dx=arr.get(mid)[0]-arr.get(i)[0];
+        for(;e<end;e++){
+            long dx=arr.get(mid)[0]-arr.get(e)[0];
             if(dx*dx>ret) break;
-            subRight.add(arr.get(i));
+            arr.add(arr.get(e));
         }
-        for(int i=0;i<subLeft.size();i++){
-            for(int j=0;j<subLeft.size();j++){
-                ret=Math.min(ret,distance(subLeft.get(i),subRight.get(j)));
+        Collections.sort(arr.subList(s,e+1),new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a,int[] b){
+                return a[1]-b[1];
+            }
+        });
+        for(int i=0;i<arr.size()-1;i++){
+            for(int j=i+1;j<arr.size();j++){
+                long dy=arr.get(i)[1]-arr.get(j)[1];
+                if(dy*dy>ret) break;
+                ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
             }
         }
         return ret;
@@ -60,7 +68,6 @@ class Main{
         Collections.sort(arr,new Comparator<int[]>(){
             @Override
             public int compare(int[] a, int[] b){
-                if(a[0]==b[0]) return a[1]-b[1];
                 return a[0]-b[0];
             }
         });
