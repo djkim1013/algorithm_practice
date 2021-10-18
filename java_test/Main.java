@@ -27,19 +27,26 @@ class Main{
         }
         int mid=(start+end)/2;
         long ret=Math.min(minDistance(arr,start,mid),minDistance(arr,mid+1,end));
-        int s=mid,e=mid+1;
-        while(--s>start){
-            long dx=arr.get(--s)[0]-arr.get(mid)[0];
-            if(dx*dx>ret) break;
-        }
-        while(++e<end){
-            long dx=arr.get(++e)[0]-arr.get(mid)[0];
-            if(dx*dx>ret) break;
-        }
+        ArrayList<int[]> subArr=new ArrayList<int[]>();
         for(int i=mid;i>=start;i--){
-            for(int j=mid+1;j<=end;j++){
-                ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
+            long dx=arr.get(mid)[0]-arr.get(i)[0];
+            if(dx*dx>ret) break;
+            subArr.add(arr.get(i));
+        }
+        for(int i=mid+1;i<=end;i++){
+            long dx=arr.get(mid)[0]-arr.get(i)[0];
+            if(dx*dx>ret) break;
+            subArr.add(arr.get(i));
+        }
+        Collections.sort(subArr,new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                if(a[1]==b[1]) return a[0]-b[0];
+                return a[1]-b[1];
             }
+        });
+        for(int i=0;i+1<subArr.size();i++){
+            ret=Math.min(ret,distance(subArr.get(i),subArr.get(i+1)));
         }
         return ret;
     }
