@@ -7,17 +7,17 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    static final long MAXD=2*20000*20000;
+    static final int MAXD=2*20000*20000;
 
-    static long distance(int[] a,int[] b){
-        long ret=(a[0]-b[0])*(a[0]-b[0]);
+    static int distance(int[] a,int[] b){
+        int ret=(a[0]-b[0])*(a[0]-b[0]);
         ret+=(a[1]-b[1])*(a[1]-b[1]);
         return ret;
     }
 
-    static long minDistanceX(ArrayList<int[]> arr,int start,int end){
+    static int minDistance(ArrayList<int[]> arr,int start,int end){
         if(end-start<3){
-            long ret=MAXD;
+            int ret=MAXD;
             for(int i=start;i<end;i++){
                 for(int j=i+1;j<=end;j++){
                     ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
@@ -26,17 +26,15 @@ class Main{
             return ret;
         }
         int mid=(start+end)/2;
-        long ret=Math.min(minDistanceX(arr,start,mid),minDistanceX(arr,mid+1,end));
+        int ret=Math.min(minDistance(arr,start,mid),minDistance(arr,mid+1,end));
         int s=mid,e=mid+1;
         for(;s>start;s--){
-            long dx=arr.get(mid)[0]-arr.get(s)[0];
+            int dx=arr.get(mid)[0]-arr.get(s)[0];
             if(dx*dx>ret) break;
-            arr.add(arr.get(s));
         }
         for(;e<end;e++){
-            long dx=arr.get(mid)[0]-arr.get(e)[0];
+            int dx=arr.get(mid)[0]-arr.get(e)[0];
             if(dx*dx>ret) break;
-            arr.add(arr.get(e));
         }
         Collections.sort(arr.subList(s,e+1),new Comparator<int[]>(){
             @Override
@@ -44,9 +42,9 @@ class Main{
                 return a[1]-b[1];
             }
         });
-        for(int i=0;i<arr.size()-1;i++){
-            for(int j=i+1;j<arr.size();j++){
-                long dy=arr.get(i)[1]-arr.get(j)[1];
+        for(int i=s;i<e;i++){
+            for(int j=i+1;j<=e;j++){
+                int dy=arr.get(i)[1]-arr.get(j)[1];
                 if(dy*dy>ret) break;
                 ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
             }
@@ -71,6 +69,6 @@ class Main{
                 return a[0]-b[0];
             }
         });
-        System.out.println(minDistanceX(arr,0,n-1));
+        System.out.println(minDistance(arr,0,n-1));
     }
 }
