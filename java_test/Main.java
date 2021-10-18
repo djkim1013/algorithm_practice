@@ -27,10 +27,17 @@ class Main{
         }
         int mid=(start+end)/2;
         long ret=Math.min(minDistance(arr,start,mid),minDistance(arr,mid+1,end));
+        int s=mid,e=mid+1;
+        while(--s>start){
+            long dx=arr.get(--s)[0]-arr.get(mid)[0];
+            if(dx*dx>ret) break;
+        }
+        while(++e<end){
+            long dx=arr.get(++e)[0]-arr.get(mid)[0];
+            if(dx*dx>ret) break;
+        }
         for(int i=mid;i>=start;i--){
-            if(distance(arr.get(i),new int[]{arr.get(mid)[0],0})>ret) break;
             for(int j=mid+1;j<=end;j++){
-                if(distance(arr.get(j),new int[]{arr.get(mid)[0],0})>ret) break;
                 ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
             }
         }
