@@ -26,7 +26,15 @@ class Main{
             return ret;
         }
         int mid=(start+end)/2;
-        return Math.min(minDistance(arr,start,mid),minDistance(arr,mid,end));
+        long ret=Math.min(minDistance(arr,start,mid),minDistance(arr,mid+1,end));
+        for(int i=mid;i>=start;i--){
+            if(distance(arr.get(i),new int[]{arr.get(mid)[0],0})>ret) break;
+            for(int j=mid+1;j<=end;j++){
+                if(distance(arr.get(j),new int[]{arr.get(mid)[0],0})>ret) break;
+                ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
+            }
+        }
+        return ret;
     }
 
     public static void main(String[] args)throws Exception{
