@@ -9,12 +9,11 @@ import java.util.*;
 class Main{
     static int bisearch(Integer[] arr,int target,int start,int end){
         if(start==end){
-            if(arr[start]>=target) return start;
-            return start-1;
+            if(arr[start]>=target) return start+1;
+            return start;
         }
         int mid=(start+end)/2;
-        if(arr[mid]==target) return mid;
-        if(arr[mid]<target) return bisearch(arr,target,start,mid);
+        if(arr[mid]<=target) return bisearch(arr,target,start,mid);
         return bisearch(arr,target,mid+1,end);
     }
     static public void main(String[] args)throws Exception{
@@ -31,7 +30,7 @@ class Main{
         while(true){
             int sum=0;
             for(int i=answer;i<=arr[0];i+=answer){
-                sum+=bisearch(arr,i,0,k-1)+1;
+                sum+=bisearch(arr,i,0,k-1);
             }
             if(sum>=n) break;
             answer--;
