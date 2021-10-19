@@ -7,17 +7,17 @@ import java.util.*;
 import java.io.*;
 
 class Main{
-    static final long MAXD=2*20000*20000;
+    static final int MAXD=2*20000*20000;
 
-    static long distance(int[] a,int[] b){
-        long ret=(a[0]-b[0])*(a[0]-b[0]);
-        ret+=(a[1]-b[1])*(a[1]-b[1]);
-        return ret;
+    static int distance(int[] a,int[] b){
+        int dx=a[0]-b[0];
+        int dy=a[1]-b[1];
+        return dx*dx+dy*dy;
     }
 
-    static long minDistanceY(ArrayList<int[]> arr,int start,int end){
+    static int minDistanceY(ArrayList<int[]> arr,int start,int end){
         if(end-start<3){
-            long ret=MAXD;
+            int ret=MAXD;
             for(int i=start;i<end;i++){
                 for(int j=i+1;j<=end;j++){
                     ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
@@ -29,9 +29,9 @@ class Main{
         return Math.min(minDistanceY(arr,start,mid),minDistanceY(arr,mid,end));
     }
 
-    static long minDistanceX(ArrayList<int[]> arr,int start,int end){
+    static int minDistanceX(ArrayList<int[]> arr,int start,int end){
         if(end-start<3){
-            long ret=MAXD;
+            int ret=MAXD;
             for(int i=start;i<end;i++){
                 for(int j=i+1;j<=end;j++){
                     ret=Math.min(ret,distance(arr.get(i),arr.get(j)));
@@ -40,15 +40,15 @@ class Main{
             return ret;
         }
         int mid=(start+end)/2;
-        long ret=Math.min(minDistanceX(arr,start,mid),minDistanceX(arr,mid+1,end));
+        int ret=Math.min(minDistanceX(arr,start,mid),minDistanceX(arr,mid+1,end));
         ArrayList<int[]> subArr=new ArrayList<int[]>();
         for(int i=mid;i>=start;i--){
-            long dx=arr.get(mid)[0]-arr.get(i)[0];
+            int dx=arr.get(mid)[0]-arr.get(i)[0];
             if(dx*dx>ret) break;
             subArr.add(arr.get(i));
         }
         for(int i=mid+1;i<=end;i++){
-            long dx=arr.get(mid)[0]-arr.get(i)[0];
+            int dx=arr.get(mid)[0]-arr.get(i)[0];
             if(dx*dx>ret) break;
             subArr.add(arr.get(i));
         }

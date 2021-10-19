@@ -2,6 +2,8 @@
 //2021.10.18
 //category: 분할정복
 //review:
+//      - 마지막 y 비교는 전체 경우의수를 비교해야한다고 생각했지만,
+//          이미 x가 가까운 경우는 계산된 후 이므로 중복계산이다.
 
 import java.util.*;
 import java.io.*;
@@ -27,15 +29,14 @@ class Main{
         }
         int mid=(start+end)/2;
         int ret=Math.min(minDistance(arr,start,mid),minDistance(arr,mid+1,end));
+        int band=(int)Math.sqrt(ret)+1;
         ArrayList<int[]> subArr=new ArrayList<int[]>();
         for(int i=mid;i>=start;i--){
-            int dx=arr.get(mid)[0]-arr.get(i)[0];
-            if(dx*dx>ret) break;
+            if(arr.get(mid)[0]-arr.get(i)[0]>band) break;
             subArr.add(arr.get(i));
         }
         for(int i=mid+1;i<=end;i++){
-            int dx=arr.get(mid)[0]-arr.get(i)[0];
-            if(dx*dx>ret) break;
+            if(arr.get(mid)[0]-arr.get(i)[0]>band) break;
             subArr.add(arr.get(i));
         }
         Collections.sort(subArr,new Comparator<int[]>(){
@@ -46,7 +47,7 @@ class Main{
         });
         for(int i=0;i+1<subArr.size();i++){
             for(int j=i+1;j<subArr.size();j++){
-                if(subArr.get(i)[1]-subArr.get(j)[1]>ret) break;
+                if(subArr.get(i)[1]-subArr.get(j)[1]>band) break;
                 ret=Math.min(ret,distance(subArr.get(i),subArr.get(j)));
             }
         }
