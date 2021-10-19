@@ -9,13 +9,14 @@ import java.util.*;
 class Main{
     static int bisearch(Integer[] arr,int target,int start,int end){
         if(start==end){
-            if(arr[start]>=target) return start+1;
-            return start;
+            if(arr[start]<target) return start;
+            return start+1;
         }
         int mid=(start+end)/2;
-        if(arr[mid]<=target) return bisearch(arr,target,start,mid);
+        if(arr[mid]<target) return bisearch(arr,target,start,mid);
         return bisearch(arr,target,mid+1,end);
     }
+
     static public void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         String input=br.readLine();
