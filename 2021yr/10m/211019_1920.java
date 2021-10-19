@@ -7,29 +7,20 @@ import java.io.*;
 import java.util.*;
 
 class Main{
-    static int search(int[] data,int target,int start,int end){
-        if(end==start){
-            return data[start]==target?1:0;
-        }
-        int mid=(start+end)/2;
-        if(target==data[mid]) return 1;
-        if(target<data[mid]) return search(data,target,start,mid);
-        return search(data,target,mid+1,end);
-    }
-    
     static public void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        HashSet<String> data=new HashSet<String>();
+        StringBuilder answer=new StringBuilder();
+        
         int n=Integer.parseInt(br.readLine());
-        int[] data=new int[n];
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        for(int i=0;i<n;i++) data[i]=Integer.parseInt(st.nextToken());
-        Arrays.sort(data);
+        st=new StringTokenizer(br.readLine());
+        for(int i=0;i<n;i++) data.add(st.nextToken());
+        
         int m=Integer.parseInt(br.readLine());
         st=new StringTokenizer(br.readLine());
-        StringBuilder answer=new StringBuilder();
         for(int i=0;i<m;i++){
-            int target=Integer.parseInt(st.nextToken());
-            answer.append(search(data,target,0,n-1)).append("\n");
+            answer.append(data.contains(st.nextToken())?1:0).append("\n");
         }
         System.out.println(answer);
     }
