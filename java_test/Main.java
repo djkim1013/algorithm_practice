@@ -7,22 +7,34 @@ import java.io.*;
 import java.util.*;
 
 class Main{
+    static int bisearch(Integer[] arr,int target,int start,int end){
+        if(start==end){
+            if(arr[start]>=target) return start;
+            return start-1;
+        }
+        int mid=(start+end)/2;
+        if(arr[mid]==target) return mid;
+        if(arr[mid]<target) return bisearch(arr,target,start,mid);
+        return bisearch(arr,target,mid+1,end);
+    }
     static public void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        int n=Integer.parseInt(br.readLine());
-        HashMap<String,Integer> map=new HashMap<String,Integer>();
-        StringTokenizer st=new StringTokenizer(br.readLine());
-        while(n-->0){
-            String key=st.nextToken();
-            if(!map.containsKey(key)) map.put(key,0);
-            map.put(key,map.get(key)+1);
+        String input=br.readLine();
+        int k=Integer.parseInt(input.substring(0,input.indexOf(" ")));
+        int n=Integer.parseInt(input.substring(input.indexOf(" ")+1));
+        Integer[] arr=new Integer[k];
+        for(int i=0;i<k;i++){
+            arr[i]=Integer.parseInt(br.readLine());
         }
-        n=Integer.parseInt(br.readLine());
-        StringBuilder answer=new StringBuilder();
-        st=new StringTokenizer(br.readLine());
-        while(n-->0){
-            String target=st.nextToken();
-            answer.append(map.containsKey(target)?map.get(target):0).append(" ");
+        Arrays.sort(arr,Collections.reverseOrder());
+        int answer=arr[k-1];
+        while(true){
+            int sum=0;
+            for(int i=answer;i<=arr[0];i+=answer){
+                sum+=bisearch(arr,i,0,k-1)+1;
+            }
+            if(sum>=n) break;
+            answer--;
         }
         System.out.println(answer);
     }
