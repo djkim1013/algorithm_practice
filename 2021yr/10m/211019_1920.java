@@ -1,6 +1,6 @@
 //BOJ 1920
 //2021.10.19
-//category: 분할정복
+//category: 이분탐색
 //review:
 
 import java.io.*;
