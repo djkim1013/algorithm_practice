@@ -2,6 +2,7 @@
 //2021.10.19
 //category: 이분탐색
 //review:
+//      - 모든 랜선을 사용해야하는 것은 아니다.
 
 import java.io.*;
 import java.util.*;
@@ -27,14 +28,14 @@ class Main{
             arr[i]=Integer.parseInt(br.readLine());
         }
         Arrays.sort(arr,Collections.reverseOrder());
-        int answer=arr[k-1];
+        int answer=arr[0];
         while(true){
             int sum=0;
-            for(int i=answer;i<=arr[0];i+=answer){
+            for(int i=answer;i>0&&i<=arr[0];i+=answer){
                 sum+=bisearch(arr,i,0,k-1);
             }
             if(sum>=n) break;
-            answer--;
+            answer/=2;
         }
         System.out.println(answer);
     }
