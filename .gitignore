@@ -1,6 +1,4 @@
 #local setting
 .vscode/
 .setting/
-#Main.java
-#main.cpp
 cpp_test/main.exe
