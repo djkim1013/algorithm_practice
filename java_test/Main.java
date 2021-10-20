@@ -10,8 +10,8 @@ import java.util.*;
 class Main{
     static int bisearch(Integer[] arr,int target,int start,int end){
         if(start==end){
-            if(arr[start]<target) return start;
-            return start+1;
+            if(arr[start]<target) return start-1;
+            return start;
         }
         int mid=(start+end)/2;
         if(arr[mid]<target) return bisearch(arr,target,start,mid);
@@ -28,15 +28,19 @@ class Main{
             arr[i]=Integer.parseInt(br.readLine());
         }
         Arrays.sort(arr,Collections.reverseOrder());
-        int answer=arr[0];
+        int len=arr[0];
         while(true){
             int sum=0;
-            for(int i=answer;i>0&&i<=arr[0];i+=answer){
-                sum+=bisearch(arr,i,0,k-1);
+            int boundary=k-1;
+            for(int i=len;i>0&&i<=arr[0];i+=len){
+                boundary=bisearch(arr,i,0,boundary);
+                sum+=boundary+1;
             }
-            if(sum>=n) break;
-            answer/=2;
+            if(sum>=n){
+                System.out.println(len);
+                break;
+            }
+            len--;
         }
-        System.out.println(answer);
     }
 }
