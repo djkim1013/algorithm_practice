@@ -8,16 +8,6 @@ import java.io.*;
 import java.util.*;
 
 class Main{
-    static int bisearch(Integer[] arr,int target,int start,int end){
-        if(start==end){
-            if(arr[start]<target) return start-1;
-            return start;
-        }
-        int mid=(start+end)/2;
-        if(arr[mid]<target) return bisearch(arr,target,start,mid);
-        return bisearch(arr,target,mid+1,end);
-    }
-
     static public void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         String input=br.readLine();
@@ -27,20 +17,40 @@ class Main{
         for(int i=0;i<k;i++){
             arr[i]=Integer.parseInt(br.readLine());
         }
-        Arrays.sort(arr,Collections.reverseOrder());
-        int len=arr[0];
-        while(true){
+        Arrays.sort(arr);
+        for(int i=arr[k-1];i>=1;i--){
             int sum=0;
-            int boundary=k-1;
-            for(int i=len;i>0&&i<=arr[0];i+=len){
-                boundary=bisearch(arr,i,0,boundary);
-                sum+=boundary+1;
+            int count=i;
+            for(int j=0;j<k;j++){
+                if(arr[j]>=count){
+                    sum+=k-j;
+                    count+=i;
+                    j--;
+                }
             }
             if(sum>=n){
-                System.out.println(len);
-                break;
+                System.out.println(i);
+                return;
             }
-            len--;
         }
     }
 }
+
+/* 
+<case 1>
+4 11
+802
+743
+457
+539
+answer : 200
+
+<case 2>
+4 5
+10
+1
+1
+1
+answer : 2
+
+*/
