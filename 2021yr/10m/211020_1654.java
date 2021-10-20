@@ -9,13 +9,13 @@ import java.io.*;
 //import java.util.*;
 
 class Main{
-    static long maxLen(Long[] arr,int n,long start,long end){
+    static int maxLen(Integer[] arr,int n,int start,long end){
         if(start==end){
-            return start-1;
+            return start;
         }
-        long mid=(start+end)/2;
+        int mid=(int)((long)start+end)/2;
         int sum=0;
-        for(long i:arr) sum+=i/mid;
+        for(int i:arr) sum+=i/mid;
         if(sum<n) return maxLen(arr,n,start,mid);
         return maxLen(arr,n,mid+1,end);
     }
@@ -25,12 +25,14 @@ class Main{
         String input=br.readLine();
         int k=Integer.parseInt(input.substring(0,input.indexOf(" ")));
         int n=Integer.parseInt(input.substring(input.indexOf(" ")+1));
-        Long[] arr=new Long[k];
-        long max=0;
+        Integer[] arr=new Integer[k];
+        int max=0;
         for(int i=0;i<k;i++){
-            arr[i]=Long.parseLong(br.readLine());
+            arr[i]=Integer.parseInteger(br.readLine());
             max=Math.max(max,arr[i]);
         }
-        System.out.println(maxLen(arr,n,1,max+1));
+        int answer=maxLen(arr,n,1,max);
+        if(answer<max) answer--;
+        System.out.println(answer);
     }
 }

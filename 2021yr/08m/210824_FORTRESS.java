@@ -9,7 +9,7 @@ import java.io.*;
 
 public class Main {
     static int[][] walls=new int[100][3];
-    static int n, longest;
+    static int n, intest;
     class Node{
         int idx;
         List<Node> children = new ArrayList<Node>();
@@ -54,16 +54,16 @@ public class Main {
         if(heights.isEmpty()) return 0;
         Collections.sort(heights);
         if(heights.size()>=2){
-            longest=Math.max(longest,
+            intest=Math.max(intest,
                 2+heights.get(heights.size()-2)+heights.get(heights.size()-1));
         }
         return heights.get(heights.size()-1)+1;
     }
 
     int solve(Node root){
-        longest=0;
+        intest=0;
         int h=height(root);
-        return Math.max(longest,h);
+        return Math.max(intest,h);
     }
 
     public static void main(String[] args) throws Exception{

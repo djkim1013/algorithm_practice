@@ -14,7 +14,7 @@ JLIS : https://algospot.com/judge/problem/read/JLIS
 
 using namespace std;
 
-const long NEGI=numeric_limits<long>::min();
+const int NEGI=numeric_limits<int>::min();
 int n,m;
 
 int find_JLIS(vector<int>& A,vector<int>& B,vector<vector<int>>& mem,int ia,int ib)
@@ -22,9 +22,9 @@ int find_JLIS(vector<int>& A,vector<int>& B,vector<vector<int>>& mem,int ia,int 
     int& ret=mem[ia+1][ib+1];
     if(ret>-1)return ret;
     ret=2;
-    long a=(ia==-1?NEGI:A[ia]);
-    long b=(ib==-1?NEGI:B[ib]);
-    long maxE=max(a,b);
+    int a=(ia==-1?NEGI:A[ia]);
+    int b=(ib==-1?NEGI:B[ib]);
+    int maxE=max(a,b);
     for(int i=ia+1;i<n;i++)
         if(maxE<A[i])
             ret=max(ret,find_JLIS(A,B,mem,i,ib)+1);

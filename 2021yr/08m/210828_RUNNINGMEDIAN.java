@@ -11,7 +11,7 @@ import java.io.*;
 
 class inputGen{
     int a, b;
-    long A=-1;
+    int A=-1;
     public inputGen(int a,int b){
         this.a=a;
         this.b=b;

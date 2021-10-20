@@ -8,12 +8,12 @@ import java.util.*;
 
 class Main{
     static int[] arr;
-    static long maxArea(int start,int end){
+    static int maxArea(int start,int end){
         if(start==end) return arr[start];
         int mid=(start+end)/2;
         int s=mid, e=mid+1;
-        long h=Math.min(arr[mid],arr[mid+1]);
-        long ret=maxArea(start,mid);
+        int h=Math.min(arr[mid],arr[mid+1]);
+        int ret=maxArea(start,mid);
         ret=Math.max(ret,maxArea(mid+1,end));
         ret=Math.max(ret,h*2);
         while(s>start||e<end){

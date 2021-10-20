@@ -8,9 +8,9 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static final long TWO_32ND=(long)Math.pow(2,32);
-    static long A = -1;
-    static long nextA(){
+    static final int TWO_32ND=(int)Math.pow(2,32);
+    static int A = -1;
+    static int nextA(){
         if(A<0) return A=1983;
         return A = (A * 214013 + 2531011) % TWO_32ND;
     }

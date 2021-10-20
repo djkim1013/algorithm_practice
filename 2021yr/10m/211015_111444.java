@@ -16,9 +16,9 @@ class Main{
         int[][] ret=new int[r][c];
         for(int i=0;i<r;i++){
             for(int j=0;j<c;j++){
-                long sum=0;
+                int sum=0;
                 for(int k=0;k<n;k++){
-                    sum+=(long)a[i][k]*b[k][j]%MOD;
+                    sum+=(int)a[i][k]*b[k][j]%MOD;
                     sum%=MOD;
                 }
                 ret[i][j]=(int)sum;
@@ -27,7 +27,7 @@ class Main{
         return ret;
     }
 
-    static int[][] power(final int[][] a, long k){
+    static int[][] power(final int[][] a, int k){
         if(k==0) return new int[][]{{1,0},{0,1}};
         if(k==1) return a;
         int[][] ret=power(a,k/2);
@@ -37,7 +37,7 @@ class Main{
     }
 
     public static void main(String[] args)throws Exception{
-        long n=Long.parseLong((new BufferedReader(new InputStreamReader(System.in))).readLine());
+        int n=Integer.parseInteger((new BufferedReader(new InputStreamReader(System.in))).readLine());
         int[][] matrix=new int[][]{{1,1},{1,0}};
         matrix=power(matrix,n-1);
         matrix=multiple(matrix,new int[][]{{1},{0}});

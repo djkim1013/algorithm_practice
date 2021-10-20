@@ -8,11 +8,11 @@ import java.util.*;
 import java.io.*;
 
 public class Main{
-    static long[] cache = new long[101];
-    static long padovan(int n){
+    static int[] cache = new int[101];
+    static int padovan(int n){
         if(n==0) return 0;
         if(n<=2) return 1;
-        long ret = cache[n];
+        int ret = cache[n];
         if(ret!=-1) return ret;
         ret = padovan(n-3);
         ret += padovan(n-2);

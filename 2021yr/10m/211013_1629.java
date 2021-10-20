@@ -14,8 +14,8 @@ class Main{
         if(idx==0) return 1;
         if(idx==1) return a%c;
         int ret=pow(idx/2);
-        ret=(int)((long)ret*ret%c);
-        if(idx%2>0) ret=(int)((long)ret*a%c);
+        ret=(int)((int)ret*ret%c);
+        if(idx%2>0) ret=(int)((int)ret*a%c);
         return ret;
     }
     public static void main(String[] args)throws Exception{

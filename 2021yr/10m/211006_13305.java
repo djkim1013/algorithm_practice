@@ -23,9 +23,9 @@ public class Main {
             prices[i]=Integer.parseInt(st.nextToken());
         }
         int minPrice=prices[0];
-        long minSum=0;
+        int minSum=0;
         for(int i=0;i<n-1;i++){
-            minSum+=(long)minPrice*lengths[i];
+            minSum+=(int)minPrice*lengths[i];
             minPrice=Math.min(minPrice,prices[i+1]);
         }
         System.out.println(minSum);

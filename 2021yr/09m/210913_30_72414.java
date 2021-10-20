@@ -28,7 +28,7 @@ class Solution {
     
     public String solution(String play_time, String adv_time, String[] logs) {
         int answer=0;
-        long answer_sec=0, sum=0;
+        int answer_sec=0, sum=0;
         int end_sec=timeStrToSec(play_time);
         int adv_sec=timeStrToSec(adv_time);
         int[] timeTable=new int[end_sec+1];

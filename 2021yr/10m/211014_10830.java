@@ -23,7 +23,7 @@ class Main{
         return ret;
     }
 
-    static int[][] power(int[][] matrix,long b){
+    static int[][] power(int[][] matrix,int b){
         if(b==1) return matrix;
         int[][] ret=power(matrix,b/2);
         ret=multiple(ret,ret);
@@ -35,7 +35,7 @@ class Main{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st=new StringTokenizer(br.readLine());
         n=Integer.parseInt(st.nextToken());
-        long b=Long.parseLong(st.nextToken());
+        int b=Integer.parseInteger(st.nextToken());
         a=new int[n][n];
         for(int i=0;i<n;i++){
             st=new StringTokenizer(br.readLine());

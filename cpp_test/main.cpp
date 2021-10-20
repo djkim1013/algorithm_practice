@@ -9,7 +9,7 @@ using namespace std;
 
 int main(){
 	int a=0x7fffffff;
-	long long b=1;
-	long long c=(long long)a+1;
+	int int b=1;
+	int int c=(int int)a+1;
 	cout<<c;
 }
