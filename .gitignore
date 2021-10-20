@@ -3,4 +3,4 @@
 .setting/
 #Main.java
 #main.cpp
-./cpp_test/main.exe
+cpp_test/main.exe
