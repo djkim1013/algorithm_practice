@@ -1,5 +1,5 @@
 //BOJ 2805
-//2021.10.20
+//2021.10.21
 //category: 이분탐색
 //review:
 
@@ -17,9 +17,10 @@ class Main{
     }
     
     static int minLen(int[] trees,int max,int m){
-        int start=0, end=max-1;
+        int start=0, end=max;
         while(start<end){
             int mid=(int)(((long)start+end)/2);
+            System.out.println(mid+" "+cutLen(trees,mid));
             if(cutLen(trees,mid)<(long)m) end=mid;
             else start=mid+1;
         }
@@ -38,7 +39,6 @@ class Main{
             trees[i]=Integer.parseInt(st.nextToken());
             max=Math.max(trees[i],max);
         }
-        int answer=minLen(trees,max,m);
-        System.out.println(answer>0?answer-1:0);
+        System.out.println(minLen(trees,max,m));
     }
 }
