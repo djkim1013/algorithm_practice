@@ -39,6 +39,6 @@ class Main{
             trees[i]=Integer.parseInt(st.nextToken());
             max=Math.max(trees[i],max);
         }
-        System.out.println(minLen(trees,max,m));
+        System.out.println(minLen(trees,max,m)-1);
     }
 }
