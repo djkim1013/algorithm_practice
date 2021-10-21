@@ -11,5 +11,17 @@ class Main{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
         int k=Integer.parseInt(br.readLine())-1;
+        long half=((long)n*n+n+1)/2;
+        if(k<=half){
+            for(int i=n;i>=1;i--){
+                half-=i;
+                if(half<=k){
+                    int j=k-(int)half;
+                    System.out.println()
+                }
+            }
+        }else{
+
+        }
     }
 }
