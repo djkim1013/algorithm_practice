@@ -2,6 +2,7 @@
 //2021.10.21
 //category: 이분탐색
 //review:
+//      + 불필요한 continue을 줄이자
 
 import java.io.*;
 import java.util.*;
@@ -10,8 +11,7 @@ class Main{
     static long cutLen(int[] trees,int height){
         long sum=0;
         for(int i:trees){
-            if(i<=height) continue;
-            sum+=i-height;
+            if(i>height) sum+=i-height;
         }
         return sum;
     }
