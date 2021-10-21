@@ -1,44 +1,57 @@
-//BOJ 2805
+//BOJ 2110
 //2021.10.21
 //category: 이분탐색
 //review:
 
+//brute force
 import java.io.*;
 import java.util.*;
 
 class Main{
-    static long cutLen(int[] trees,int height){
-        long sum=0;
-        for(int i:trees){
-            if(i<=height) continue;
-            sum+=i-height;
+    static int[] dist;
+    static int dfs(int idx,int c,boolean[] cur){
+        if(c==0){
+            return minDist(cur);
         }
-        return sum;
+        if(idx==cur.length){
+            return 0;
+        }
+        int ret=dfs(idx+1,c,cur);
+        cur[idx]=true;
+        ret=Math.max(ret,dfs(idx+1,c-1,cur));
+        cur[idx]=false;
+        return ret;
     }
     
-    static int minLen(int[] trees,int max,int m){
-        int start=0, end=max;
-        while(start<end){
-            int mid=(int)(((long)start+end)/2);
-            //System.out.println(mid+" "+cutLen(trees,mid));
-            if(cutLen(trees,mid)<(long)m) end=mid;
-            else start=mid+1;
+    static int minDist(boolean[] installed){
+        int min=Integer.MAX_VALUE;
+        int cur=0;
+        int d=installed[0]?dist[0]:Integer.MAX_VALUE;
+        while(++cur<installed.length){
+            if(installed[cur]){
+                min=Math.min(min,d);
+                d=dist[cur];
+            }else{
+                d+=dist[cur];
+            }
         }
-        return start;
+        return min;
     }
     
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st=new StringTokenizer(br.readLine());
         int n=Integer.parseInt(st.nextToken());
-        int m=Integer.parseInt(st.nextToken());
-        int[] trees=new int[n];
-        st=new StringTokenizer(br.readLine());
-        int max=0;
+        int c=Integer.parseInt(st.nextToken());
+        int[] house=new int[n];
         for(int i=0;i<n;i++){
-            trees[i]=Integer.parseInt(st.nextToken());
-            max=Math.max(trees[i],max);
+            house[i]=Integer.parseInt(br.readLine());
         }
-        System.out.println(minLen(trees,max,m)-1);
+        Arrays.sort(house);
+        dist=new int[n];
+        for(int i=0;i+1<n;i++){
+            dist[i]=house[i+1]-house[i];
+        }
+        System.out.println(dfs(0,c,new boolean[n]));
     }
 }
