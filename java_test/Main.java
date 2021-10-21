@@ -14,8 +14,7 @@ class Main{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
         int k=Integer.parseInt(br.readLine());
-        int start=0, end=k;
-        int answer=0;
+        int start=1, end=k;
         while(start<=end){
             int mid=(int)((long)start+end)/2;
             long sum=0;
@@ -27,9 +26,8 @@ class Main{
                 start=mid+1;
             }else{
                 end=mid-1;
-                answer=mid;
             }
         }
-        System.out.println(answer);
+        System.out.println(start);
     }
 }
