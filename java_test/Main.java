@@ -13,19 +13,22 @@ class Main{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
         int k=Integer.parseInt(br.readLine());
-        int start=1;
-        int end=(int)Math.min((long)n*n,Integer.MAX_VALUE);
+        long start=0, end=n*n;
         while(start<end){
-            int mid=(int)((long)start+end)/2;
-            int sum=0;
+            long mid=(start+end)/2;
+            long sum=0;
             for(int i=1;i<=n;i++){
                 sum+=Math.min(mid/i,n);
             }
-            if(sum==k){
+            // System.out.println(mid+":"+sum);
+            if(sum<k){
+                start=mid+1;
+            }else if(sum>k){
+                end=mid;
+            }else{
                 start=mid;
                 break;
-            }else if(sum<k) start=mid+1;
-            else end=mid-1;
+            }
         }
         System.out.println(start);
     }
