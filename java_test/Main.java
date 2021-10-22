@@ -5,35 +5,37 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-//import java.util.Arrays;
 
 class Main{
     static int last=0;
     static int[] maxHeap;
 
-    static void sort(){
-        int cur=last;
-        while(cur>0){
-            int next=(cur-1)/2;
-            if(maxHeap[next]>=maxHeap[cur]) return;
-            int temp=maxHeap[next];
-            maxHeap[next]=maxHeap[cur];
-            maxHeap[cur]=temp;
-            cur=next;
-        }
-    }
-
     static void add(int x){
         maxHeap[last]=x;
-        sort();
-        last++;
+        int cur=last++;
+        while(cur>0){
+            int parent=(cur-1)/2;
+            if(maxHeap[parent]>=maxHeap[cur]) return;
+            int temp=maxHeap[parent];
+            maxHeap[parent]=maxHeap[cur];
+            maxHeap[cur]=temp;
+            cur=parent;
+        }
     }
     
     static int poll(){
         if(last==0) return 0;
         int ret=maxHeap[0];
         maxHeap[0]=maxHeap[--last];
-        sort();
+        int cur=0;
+        while(cur+1<last){
+            int child=2*cur+1;
+            if(maxHeap[child]<=maxHeap[cur]) break;
+            int temp=maxHeap[child];
+            maxHeap[child]=maxHeap[cur];
+            maxHeap[cur]=temp;
+            cur=child;
+        }
         return ret;
     }
 
@@ -49,7 +51,6 @@ class Main{
             }else{
                 answer.append(poll()).append("\n");
             }
-            //System.out.println(last+" "+Arrays.toString(maxHeap));
         }
         System.out.print(answer);
     }
