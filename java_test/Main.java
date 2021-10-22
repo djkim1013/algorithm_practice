@@ -5,6 +5,7 @@
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+//import java.util.Arrays;
 
 class Main{
     static int last=0;
@@ -56,7 +57,8 @@ class Main{
             }else{
                 answer.append(poll()).append("\n");
             }
+            //System.out.println(Arrays.toString(maxHeap));
         }
-        System.out.print(answer);
+        if(answer.length()>0) System.out.print(answer);
     }
 }
