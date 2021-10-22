@@ -27,14 +27,16 @@ class Main{
         if(last==0) return 0;
         int ret=maxHeap[0];
         maxHeap[0]=maxHeap[--last];
-        int cur=0;
-        while(cur+1<last){
-            int child=2*cur+1;
-            if(maxHeap[child]<=maxHeap[cur]) break;
-            int temp=maxHeap[child];
-            maxHeap[child]=maxHeap[cur];
-            maxHeap[cur]=temp;
-            cur=child;
+        while(maxHeap[0]<maxHeap[1]||maxHeap[0]<maxHeap[2]){
+            int cur=0;
+            while(2*cur+1<last){
+                int child=2*cur+1;
+                if(maxHeap[cur]>=maxHeap[child]) break;
+                int temp=maxHeap[child];
+                maxHeap[child]=maxHeap[cur];
+                maxHeap[cur]=temp;
+                cur=child;
+            }
         }
         return ret;
     }
