@@ -10,15 +10,19 @@ class Main{
     static int last=0;
     static int[] maxHeap;
 
+    static void swap(int a,int b){
+        int temp=maxHeap[a];
+        maxHeap[a]=maxHeap[b];
+        maxHeap[b]=temp;
+    }
+
     static void add(int x){
         maxHeap[last]=x;
         int cur=last++;
         while(cur>0){
             int parent=(cur-1)/2;
             if(maxHeap[parent]>=maxHeap[cur]) return;
-            int temp=maxHeap[parent];
-            maxHeap[parent]=maxHeap[cur];
-            maxHeap[cur]=temp;
+            swap(parent,cur);
             cur=parent;
         }
     }
@@ -28,13 +32,12 @@ class Main{
         int ret=maxHeap[0];
         maxHeap[0]=maxHeap[--last];
         while(maxHeap[0]<maxHeap[1]||maxHeap[0]<maxHeap[2]){
-            int cur=0;
+            int cur=maxHeap[1]>maxHeap[2]?1:2;
+            swap(0,cur);
             while(2*cur+1<last){
                 int child=2*cur+1;
-                if(maxHeap[cur]>=maxHeap[child]) break;
-                int temp=maxHeap[child];
-                maxHeap[child]=maxHeap[cur];
-                maxHeap[cur]=temp;
+                if(maxHeap[child]<=maxHeap[cur]) break;
+                swap(child,cur);
                 cur=child;
             }
         }
