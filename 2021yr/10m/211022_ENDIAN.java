@@ -12,11 +12,8 @@ class Main{
 	long c=Long.parseLong(br.readLine());
 	while(c-->0){
 	  long n=Long.parseLong(br.readLine());
-	  long temp=0xff&n;
-	  temp=(temp<<8)+(0xff&(n>>8));
-	  temp=(temp<<8)+(0xff&(n>>16));
-	  temp=(temp<<8)+(0xff&(n>>24));
-	  answer.append(temp).append("\n");
+	  n=((0xff&n)<<24)|((0xff00&n)<<8)|((0xff0000&n)>>8)|((0xff000000&n)>>24);
+	  answer.append(n).append("\n");
 	}
 	System.out.print(answer);
   }
