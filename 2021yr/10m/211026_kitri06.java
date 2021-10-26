@@ -7,9 +7,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Solution {
-    int[][] maps;
-    int n,m;
-    
     public int solution(int[][] maps) {
         this.maps=maps;
         n=maps.length;
