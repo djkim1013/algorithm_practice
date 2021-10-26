@@ -7,15 +7,10 @@ import java.util.*;
 
 class Solution {
     public int solution(String[][] clothes) {
-        int answer = 1;
-        HashMap<String,Integer> kinds=new HashMap<String,Integer>();
-        for(String[] c:clothes){
-            if(!kinds.containsKey(c[1])) kinds.put(c[1],0);
-            kinds.put(c[1],kinds.get(c[1])+1);
-        }
-        for(String kind:kinds.keySet()){
-            answer*=kinds.get(kind)+1;
-        }
-        return answer-1;
+        return Arrays.stream(clothes)
+            .map(c->c[1])
+            .distinct()
+            .map(type->(int)Arrays.stream(clothes).filter(c->c[1].equals(type)).count()+1)
+            .reduce(1,(c,n)->c*n)-1;
     }
 }
