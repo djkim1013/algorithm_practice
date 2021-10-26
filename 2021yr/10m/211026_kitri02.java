@@ -10,12 +10,8 @@ class Solution {
         String answer = "";
         String[] strings=new String[numbers.length];
         for(int i=0;i<numbers.length;i++) strings[i]=numbers[i]+"";
-        Arrays.sort(strings,new Comparator<String>(){
-           @Override
-            public int compare(String a,String b){
-                return (b+a).compareTo(a+b);
-            }
-        });
+        //람다식
+        Arrays.sort(strings,(a,b)->(b+a).compareTo(a+b));
         if(strings[0].charAt(0)=='0') return "0";
         for(String str:strings) answer+=str;
         return answer;
