@@ -8,9 +8,8 @@ import java.util.Queue;
 
 class Solution {
     public int solution(int[][] maps) {
-        this.maps=maps;
-        n=maps.length;
-        m=maps[0].length;
+        int n=maps.length;
+        int m=maps[0].length;
         Queue<int[]> que=new LinkedList<int[]>();
         que.add(new int[]{0,0});
         int[][] moves=new int[][]{{1,0},{0,1},{-1,0},{0,-1}};
