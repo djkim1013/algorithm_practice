@@ -3,19 +3,19 @@
 //category: 이분탐색
 //review:
 
+import java.util.stream.*;
+
 class Solution {
     public int solution(int[] budgets, int M) {
         int answer=0;
         int min=1;
-        int max=0;
-        for(int b:budgets) max=Math.max(b,max);
-        
+        int max=IntStream.of(budgets).max().orElse(0);
+                
         while(min<=max){
             int mid=(min+max)/2;
-            long sum=0;
-            for(int b:budgets){
-                sum+=Math.min(b,mid);
-            }
+            long sum=IntStream.of(budgets)
+                .map(b->Math.min(b,mid))
+                .sum();
             if(sum>M) max=mid-1;
             else{
                 min=mid+1;
