@@ -1,3 +1,12 @@
+//
+//2021.10.27
+//category: 
+//review:
+
 fun main(){
-    println("Hello World!")
+    println("""
+        |h i !
+        |!
+        """.trimMargin())
+
 }
