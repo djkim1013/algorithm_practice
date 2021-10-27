@@ -3,15 +3,24 @@
 //category: DFS
 //review:
 
+import java.util.Stack;
+
 class Solution {
-  int dfs(int close,int open){
-      if (open==0) return 1;
-      int ret=dfs(close,open-1);
-      if(close>open) ret+=dfs(close-1,open);
-      return ret;
-  }
-  
-  public int solution(int n) {
-      return dfs(n,n);
-  }
+    public int solution(int n) {
+        Stack<int[]> stk=new Stack<>();
+        stk.add(new int[]{1,0});
+        int answer=0;
+        while(!stk.isEmpty()){
+            int[] cur=stk.peek();
+            stk.pop();
+            int open=cur[0], close=cur[1];
+            if(open==n&&close==n){
+                answer++;
+                continue;
+            }
+            if(open<n) stk.add(new int[]{open+1,close});
+            if(open>close) stk.add(new int[]{open,close+1});
+        }
+        return answer;
+    }
 }
