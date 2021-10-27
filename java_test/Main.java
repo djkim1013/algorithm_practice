@@ -1,29 +1,39 @@
-//코딩테스트 광탈방지 - 08 정수삼각형 직접 풀어보기
+//BOJ 11286
 //2021.10.27
-//category: 동적계획법
+//category: 우선순위큐
 //review:
 
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
-class Solution {
-    int n;
-    int[][] triangle,cache;
-    
-    int maxSum(int row,int col){
-        if(row==n||col==n) return 0;
-        if(cache[row][col]!=-1) return cache[row][col];
-        int ret=Math.max(maxSum(row+1,col),maxSum(row+1,col+1));
-        return cache[row][col]=triangle[row][col]+ret;
-    }
-    
-    public int solution(int[][] triangle) {
-        this.triangle=triangle;
-        n=triangle.length;
-        cache=new int[n][];
-        for(int i=0;i<n;i++){
-            cache[i]=new int[i+1];
-            Arrays.fill(cache[i],-1);
+class Main{
+    static class Number implements Comparable<Number>{
+        int value;
+        @Override
+        public int compareTo(Number that){
+            int a=this.value>0?this.value:-this.value;
+            int b=that.value>0?that.value:-that.value;
+            if(a==b) return this.value-that.value;
+            return a-b;
         }
-        return maxSum(0,0);
+    }
+    static public void main(String[] args)throws Exception{
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw=new BufferedWriter(new OutputStreamWriter(System.out));
+        int n=Integer.parseInt(br.readLine());
+        PriorityQueue<Number> priorQ=new PriorityQueue<>();
+        while(n-->0){
+            int input=Integer.parseInt(br.readLine());
+            if(input==0){
+                bw.write((priorQ.isEmpty()?0:priorQ.poll().value)+"\n");
+            }else{
+                Number inputN=new Number();
+                inputN.value=input;
+                priorQ.add(inputN);
+            }
+        }
+        bw.flush();
+        br.close();
+        bw.close();
     }
 }
