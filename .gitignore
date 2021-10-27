@@ -1,4 +1,5 @@
 #local setting
 .vscode/
 **.exe
+**.jar
 2021yr/10m/211021_NHNpre_mock.java
