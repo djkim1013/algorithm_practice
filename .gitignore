@@ -1,5 +1,8 @@
 #local setting
+*.exe
 .vscode/
 .setting/
 cpp_test/main.exe
 2021yr/10m/211021_NHNpre_mock.java
+test.jar
+kotlin_test/tempCodeRunnerFile.jar
