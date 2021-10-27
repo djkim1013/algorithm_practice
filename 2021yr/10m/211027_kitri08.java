@@ -3,27 +3,13 @@
 //category: 동적계획법
 //review:
 
-import java.util.Arrays;
-
 class Solution {
-    int n;
-    int[][] triangle,cache;
-    
-    int maxSum(int row,int col){
-        if(row==n||col==n) return 0;
-        if(cache[row][col]!=-1) return cache[row][col];
-        int ret=Math.max(maxSum(row+1,col),maxSum(row+1,col+1));
-        return cache[row][col]=triangle[row][col]+ret;
-    }
     
     public int solution(int[][] triangle) {
-        this.triangle=triangle;
-        n=triangle.length;
-        cache=new int[n][];
-        for(int i=0;i<n;i++){
-            cache[i]=new int[i+1];
-            Arrays.fill(cache[i],-1);
+        for(int i=triangle.length-2;i>=0;i--){
+            for(int j=0;j<=i;j++)
+                triangle[i][j]+=Math.max(triangle[i+1][j],triangle[i+1][j+1]);
         }
-        return maxSum(0,0);
+        return triangle[0][0];
     }
 }
