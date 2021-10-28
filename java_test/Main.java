@@ -7,6 +7,19 @@ import java.util.*;
 import java.io.*;
 
 class Main{
+    static int[][] cache;
+    static int[] sum;
+
+    static int findMin(int start,int end){
+        if(start==end) return 0;
+        if(cache[start][end]>0) return cache[start][end];
+        int ret=Integer.MAX_VALUE;
+        for(int i=start;i<end;i++){
+            ret=Math.min(ret,findMin(start,i)+findMin(i+1,end));
+        }
+        return cache[start][end]=ret+sum[end]-sum[start-1];
+    }
+
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         StringBuilder answer=new StringBuilder();
@@ -14,23 +27,12 @@ class Main{
         while(t-->0){
             int n=Integer.parseInt(br.readLine());
             StringTokenizer st=new StringTokenizer(br.readLine());
-            int[] sum=new int[n+1];
-            int[][] dp=new int[n+1][n+1];
+            sum=new int[n+1];
+            cache=new int[n+1][n+1];
             for(int i=1;i<=n;i++){
                 sum[i]=sum[i-1]+Integer.parseInt(st.nextToken());
             }
-            for(int len=1;len<n;len++){
-                for(int left=1;left+len<=n;left++){
-                    int right=left+len;
-                    dp[left][right]=Integer.MAX_VALUE;
-                    int psum=sum[right]-sum[left-1];
-                    for(int mid=left;mid<right;mid++){
-                        dp[left][right]=Math.min(dp[left][right],
-                                                dp[left][mid]+dp[mid+1][right]+psum);
-                    }
-                }
-            }
-            answer.append(dp[1][n]).append("\n");
+            answer.append(findMin(1,n)).append("\n");
         }
         System.out.print(answer);
         br.close();
