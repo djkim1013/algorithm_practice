@@ -17,14 +17,14 @@ class Main{
             int[] sum=new int[n+1];
             int[][] dp=new int[n+1][n+1];
             for(int i=1;i<=n;i++){
-                sum[i]=sum[i-1]+Integer.parseInt(st.nextToken());
+                sum[i]=Integer.parseInt(st.nextToken())+sum[i-1];
             }
-            for(int len=1;len<n;len++){
+            for(int len=2;len<n;len++){
                 for(int left=1;left+len<=n;left++){
                     int right=left+len;
                     dp[left][right]=Integer.MAX_VALUE;
                     int psum=sum[right]-sum[left-1];
-                    for(int mid=left;mid<right;mid++){
+                    for(int mid=left;mid<=right;mid++){
                         dp[left][right]=Math.min(dp[left][right],
                                                 dp[left][mid]+dp[mid+1][right]+psum);
                     }
