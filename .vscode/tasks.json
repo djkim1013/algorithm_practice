@@ -11,6 +11,7 @@
             "command": "kotlinc",
             "args": [
                 "${file}",
+                "-include-runtime",
                 "-d",
                 "${fileDirname}/${fileBasenameNoExtension}.jar"
             ],
