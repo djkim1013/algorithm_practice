@@ -12,7 +12,7 @@ public class Main{
     static int min=40000;
     static int n;
     static int[][] input;
-    static void divTeam(int[] team,int idx,int pre){*
+    static void divTeam(int[] team,int idx,int pre){
         if(idx==n/2){
             for(int i=1;i<n;i++){
                 for(int j=1;j<n;j++){
