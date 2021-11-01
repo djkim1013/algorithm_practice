@@ -1,6 +1,6 @@
-//2021 APC - B
+//BOJ 23293
 //2021.10.30
-//category: 
+//category: 자료구조
 //review:
 
 import java.io.*;

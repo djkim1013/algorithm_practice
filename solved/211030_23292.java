@@ -1,6 +1,6 @@
-//2021 APC - A 코딩바이오 리듬
+//boj 23292
 //2021.10.30
-//category: 
+//category: 구현
 //review:
 
 import java.io.*;
@@ -35,16 +35,7 @@ class Main{
                 max=bio;
                 bestDay=codingDay;
             }else if(max==bio){
-                if(bestDay.substring(0,4).compareTo(codingDay.substring(0,4))>0){
-                    bestDay=codingDay;
-                }else if(bestDay.substring(0,4).compareTo(codingDay.substring(0,4))==0){
-                    if(bestDay.substring(4,6).compareTo(codingDay.substring(4,6))>0){
-                        bestDay=codingDay;
-                    }else if(bestDay.substring(4,6).compareTo(codingDay.substring(4,6))==0){
-                        if(bestDay.substring(6).compareTo(codingDay.substring(6))>0)
-                            bestDay=codingDay;
-                    }
-                }
+                if(bestDay.compareTo(codingDay)>0) bestDay=codingDay;
             }
         }
         System.out.println(bestDay);
