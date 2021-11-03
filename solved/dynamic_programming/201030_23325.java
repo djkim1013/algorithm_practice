@@ -1,3 +1,8 @@
+//BOJ 23325 홍대 경진대회 F
+//2021.10.30
+//category: 다이나믹 프로그래밍
+//review:
+
 import java.io.*;
 import java.util.*;
 

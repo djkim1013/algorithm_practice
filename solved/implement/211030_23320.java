@@ -1,3 +1,8 @@
+//BOJ 23320 홍대 경진대회 A
+//2021.10.30
+//category: 구현
+//review:
+
 import java.io.*;
 import java.util.*;
 

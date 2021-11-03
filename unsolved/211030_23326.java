@@ -1,3 +1,8 @@
+//BOJ 23326 홍대 경진대회 G
+//2021.10.30
+//category: 자료구조, 트리
+//review:
+
 import java.io.*;
 import java.util.*;
 

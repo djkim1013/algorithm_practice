@@ -1,3 +1,8 @@
+//BOJ 23323 홍대 경진대회 D
+//2021.10.30
+//category: 그리디 알고리즘
+//review:
+
 import java.io.*;
 import java.util.*;
 
