@@ -1,4 +1,4 @@
-//boj 23292
+//boj 23292 apc-a
 //2021.10.30
 //category: 구현
 //review:

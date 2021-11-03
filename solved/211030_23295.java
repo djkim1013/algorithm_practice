@@ -1,3 +1,8 @@
+//BOJ 23295 APC - D
+//2021.10.30
+//category: 누적합, 스위핑
+//review:
+
 import java.io.*;
 
 class Main{

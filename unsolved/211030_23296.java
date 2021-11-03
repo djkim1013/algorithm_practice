@@ -1,3 +1,8 @@
+//BOJ 23296 APC - E
+//2021.10.30
+//category: 그리디, 깊이우선탐색
+//review:
+
 import java.io.*;
 import java.util.*;
 

@@ -1,4 +1,4 @@
-//BOJ 23293
+//BOJ 23293 APC-B
 //2021.10.30
 //category: 자료구조
 //review:

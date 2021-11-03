@@ -1,6 +1,6 @@
-//2021 APC - C
+//BOJ 23294 APC - C
 //2021.10.30
-//category: 
+//category: 자료구조, 덱
 //review:
 
 import java.io.*;
