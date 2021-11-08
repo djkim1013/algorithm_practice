@@ -1,40 +1,31 @@
-//BOJ 11066
-//2021.10.28
+//BOJ 11049
+//2021.11.08
 //category: 동적계획법
 //review:
 
-import java.util.*;
 import java.io.*;
 
 class Main{
-    static int[][] cache;
-    static int[] sum;
-
-    static int findMin(int start,int end){
-        if(start==end) return 0;
-        if(cache[start][end]>0) return cache[start][end];
-        int ret=Integer.MAX_VALUE;
-        for(int i=start;i<end;i++){
-            ret=Math.min(ret,findMin(start,i)+findMin(i+1,end));
+    int[][] size;
+    int mpCount(int left,int right){
+        if(left+1==right)
+            return size[left][0]*size[left][1]*size[right][1];
+        int ret=0xfff0000;
+        for(int i=left;i<right;i++){
+            ret=Math.min(mpCount) 
         }
-        return cache[start][end]=ret+sum[end]-sum[start-1];
     }
 
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder answer=new StringBuilder();
-        int t=Integer.parseInt(br.readLine());
-        while(t-->0){
-            int n=Integer.parseInt(br.readLine());
-            StringTokenizer st=new StringTokenizer(br.readLine());
-            sum=new int[n+1];
-            cache=new int[n+1][n+1];
-            for(int i=1;i<=n;i++){
-                sum[i]=sum[i-1]+Integer.parseInt(st.nextToken());
-            }
-            answer.append(findMin(1,n)).append("\n");
+        int n=Integer.parseInt(br.readLine());
+        int[][] size=new int[n][2];
+        for(int i=0;i<n;i++){
+            String input=br.readLine();
+            size[i][0]=Integer.parseInt(input.substring(0,input.indexOf(" ")));
+            size[i][1]=Integer.parseInt(input.substring(input.indexOf(" ")+1));
         }
-        System.out.print(answer);
+        
         br.close();
     }
 }
