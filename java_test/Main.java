@@ -6,26 +6,30 @@
 import java.io.*;
 
 class Main{
-    int[][] size;
-    int mpCount(int left,int right){
+    static int[][] size, cache;
+    static int mpCount(int left,int right){
         if(left+1==right)
             return size[left][0]*size[left][1]*size[right][1];
-        int ret=0xfff0000;
-        for(int i=left;i<right;i++){
-            ret=Math.min(mpCount) 
-        }
+        if(cache[left][right]!=0) return cache[left][right];
+        int ret=mpCount(left+1,right)+size[left][0]*size[left][1]*size[right][1];
+        ret=Math.min(
+            ret,
+            mpCount(left,right-1)+size[left][0]*size[right][0]*size[right][1]
+        );
+        return cache[left][right]=ret;
     }
 
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int n=Integer.parseInt(br.readLine());
-        int[][] size=new int[n][2];
+        size=new int[n][2];
+        cache=new int[n][n];
         for(int i=0;i<n;i++){
             String input=br.readLine();
             size[i][0]=Integer.parseInt(input.substring(0,input.indexOf(" ")));
             size[i][1]=Integer.parseInt(input.substring(input.indexOf(" ")+1));
         }
-        
+        System.out.println(mpCount(0,n-1));
         br.close();
     }
 }
