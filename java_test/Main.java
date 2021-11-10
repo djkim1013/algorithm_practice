@@ -11,11 +11,18 @@ class Main{
         if(left+1==right)
             return size[left][0]*size[left][1]*size[right][1];
         if(cache[left][right]!=0) return cache[left][right];
-        int ret=mpCount(left+1,right)+size[left][0]*size[left][1]*size[right][1];
+        int nk=size[left][0]*size[right][1];
+        int ret=mpCount(left+1,right)+nk*size[left][1];
         ret=Math.min(
             ret,
-            mpCount(left,right-1)+size[left][0]*size[right][0]*size[right][1]
+            mpCount(left,right-1)+nk*size[right][0]
         );
+        for(int i=left+1;i+2<right;i++){
+            ret=Math.min(
+                ret,
+                mpCount(left,i)+mpCount(i+1,right)+nk*size[i][1]
+            );
+        }
         return cache[left][right]=ret;
     }
 
