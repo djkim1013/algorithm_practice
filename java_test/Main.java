@@ -9,22 +9,22 @@ import java.util.*;
 class Main{
     static int m, n;
     static int[][] map;
-    static int[][][] cache;
+    static int[][] dp;
     static int[][] nextPath = new int[][]{{0,1},{1,0},{-1,0},{0,-1}};
     
-    static int countPath(int row,int col,int value){
-        if(row < 0 || row >= m) return 0;
-        if(col < 0 || col >= n) return 0;
+    static int countPath(int row,int col){
         if(row == m-1 && col == n-1) return 1;
-        if(cache[row][col][value] != -1) return cache[row][col][value];
-        if(map[row][col] >= value) return cache[row][col][value] = 0;
-        value = map[row][col];
+        if(dp[row][col] != -1) return dp[row][col];
         int ret = 0;
-        for(int[] next:nextPath){
-            int i = next[0], j = next[1];
-            ret += countPath(row + i, col + j, value);
+        for(int next = 0; next < 4; next++){
+            int i = row + nextPath[next][0];
+            if(i < 0 || i >= m) continue;
+            int j = col + nextPath[next][1];
+            if(j < 0 || j >= n) continue;
+            if(map[i][j] >= map[row][col]) continue;
+            ret += countPath(i, j);
         }
-        return cache[row][col][value] = ret;
+        return dp[row][col] = ret;
     }
 
     public static void main(String[] args)throws Exception{
@@ -33,15 +33,15 @@ class Main{
         m = Integer.parseInt(st.nextToken());
         n = Integer.parseInt(st.nextToken());
         map = new int[m][n];
-        cache = new int[m][n][10002];
+        dp = new int[m][n];
         for(int i = 0; i < m; i++){
             st = new StringTokenizer(br.readLine());
             for(int j = 0; j < n; j++){
                 map[i][j] = Integer.parseInt(st.nextToken());
-                Arrays.fill(cache[i][j],-1);
+                dp[i][j] = -1;
             }
         }
-        System.out.println(countPath(0,0,10001));
+        System.out.println(countPath(0,0));
         br.close();
     }
 }
