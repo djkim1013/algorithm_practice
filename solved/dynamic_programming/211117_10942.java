@@ -33,7 +33,8 @@ class Main{
             st = new StringTokenizer(br.readLine());
             int left = Integer.parseInt(st.nextToken());
             int right = Integer.parseInt(st.nextToken());
-            bw.write(judgePalindrome(left,right)+"\n");
+            bw.write(judgePalindrome(left,right)+'0');
+            bw.newLine();
         }
         bw.flush();
         bw.close();
