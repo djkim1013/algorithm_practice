@@ -2,3 +2,5 @@
 **.exe
 **.jar
 **_ignore.*
+**.iml
+.idea/**
