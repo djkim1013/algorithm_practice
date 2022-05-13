@@ -3,7 +3,7 @@
 **.jar
 **_ignore.*
 **.iml
-.idea/**
+.idea/
 .vscode/
 **/out/
 **/build/
