@@ -4,3 +4,4 @@
 **_ignore.*
 **.iml
 .idea/**
+.vscode/
